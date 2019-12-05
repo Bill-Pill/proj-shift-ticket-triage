@@ -3,5 +3,5 @@ module.exports = {
     connectionString: process.env.DATABASE_URL,
     ssl: true
   },
-  HOME_PAGE_URL: "https://ticket-triage.herokuapp.com/",
+  HOME_PAGE_URL: "https://ticket-triage.herokuapp.com/"
 }
