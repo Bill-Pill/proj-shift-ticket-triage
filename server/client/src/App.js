@@ -1,37 +1,18 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
-import * as actions from "./actions"
+import { Route, Switch } from 'react-router-dom'
+import Main from './components/Main'
+
 
 class App extends Component {
-
-  componentDidMount() {
-    this.props.fetchTickets()
-  }
-
-  renderTickets() {
-    const items = []
-    const { tickets } = this.props;
-    tickets.forEach(t => {
-      items.push(<div key={t.ticketid}>{t.title}</div>)
-    })
-
-    return items
-  }
-
   render() {
     return (
       <div className="App">
-        Hi I'm the app. Ticket data below:
-        {this.renderTickets()}
+        <Switch>
+          <Route exact path="/" component={Main} />
+        </Switch>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-   tickets: state.tickets
-  };
-};
-
-export default connect(mapStateToProps, actions)(App);
+export default App
