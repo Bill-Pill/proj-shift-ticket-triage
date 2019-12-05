@@ -51,7 +51,7 @@ app.use(bodyParser.urlencoded({
 app.use(morgan('combined')) // use 'tiny' or 'combined'
 
 // App Routes - Auth
-app.get('/', (req, res) => res.send('hello world'))
+// app.get('/', (req, res) => res.send('hello world'))
 app.get('/tickets', (req, res) => tickets.getTicketData(req, res, db))
 app.post('/ticket', (req, res) => tickets.postTicketData(req, res, db))
 app.put('/ticket', (req, res) => tickets.putTicketData(req, res, db))
