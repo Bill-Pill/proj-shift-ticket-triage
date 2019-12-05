@@ -63,5 +63,5 @@ app.delete('/ticket', (req, res) => tickets.deleteTicketData(req, res, db))
 
 // App Server Connection
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`app is running on port ${process.env.PORT || 3000}`)
+  console.log(`app is running on port ${process.env.PORT || 5000}`)
 })
