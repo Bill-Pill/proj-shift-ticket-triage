@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import * as actions from "../actions"
+import { fetchTickets } from "../actions"
 
 class Main extends Component {
 
@@ -34,4 +34,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(Main);
+export default connect(mapStateToProps, { fetchTickets })(Main);
