@@ -6,7 +6,7 @@ export const FETCH_TICKETS= "fetch_tickets";
 
 export const fetchTickets = () => {
   const request = axios
-    .get(`http://localhost:5000/tickets`)
+    .get(`/tickets`)
     .catch(function(error) {
       console.log("error: ", error);
     });
