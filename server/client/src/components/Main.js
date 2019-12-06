@@ -29,13 +29,15 @@ class Main extends Component {
         <div className="container-status">
         <Row type="flex" align="middle" className="row-status">
             <Col span={20} offset={2}>
+              <h3>Step progress bar changes to vertical on mobile. Animations??</h3>
               <Steps current={2} status="error">
-                <Step title="Ticket Sent" description="Your ticket is on it's way!" />
-                <Step title="Under Review" description="(USERNAME HERE) is currently reviewing your ticket" />
+                <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
+                <Step title="Resolving Issue" description="(USERNAME) is now hard at 
+                  work resolving the issue. --------------------
+                  ----------------- **COLORCHANGE** (USERNAME) is
+                  typing up a response"/>
                 <Step title="Response Requested" description="(USERNAME) has requested a response" />
-                <Step title="Resolving Issue" description="(USERNAME) is now hard at work resolving the issue)" />
-                <Step title="Waiting" description="This is a description" />
-                <Step title="Waiting" description="This is a description" />
+                <Step title="Issue Resolved" description="Huzzah! Ticket is now resolved and closed" />
               </Steps>
             </Col>
             <Col span={2}></Col>
