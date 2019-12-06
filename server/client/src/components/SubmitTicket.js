@@ -31,25 +31,23 @@ class SubmitTicket extends Component {
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
         </Layout>
-        <Sider width={500} reverseArrow={true} collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
+        <Sider width={500} reverseArrow
+          collapsible collapsed={this.state.collapsed} 
+          onCollapse={this.onCollapse}>
           <div>
             <Row>
               <Col span={20} offset={2}>
                 <Form className='ticket-form'>
                   <Form.Item style={{ color: 'yellow' }}
-                    label="Title"
-                    validateStatus='error'
-                    help='Oh no! Did you forget to include a title?'>
+                    label="Title">
                     <Input
                       name='title'
                       onChange={ this.onChange } />
                   </Form.Item>
                   <Form.Item
-                    label="Details"
-                    validateStatus='error'
-                    help='Oh no! Did you forget to include details?'>
+                    label="Details">
                     <TextArea 
-                      rows={25}
+                      rows={15}
                       name='details'
                       onChange={ this.onChange } />
                   </Form.Item>

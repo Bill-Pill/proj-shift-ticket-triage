@@ -22,5 +22,9 @@ code {
 }
 
 .ticket-form label {
-  color: #6A7506;
+  color: yellowgreen
+}
+
+.ant-layout-sider-collapsed .ticket-form {
+  display: none;
 }
