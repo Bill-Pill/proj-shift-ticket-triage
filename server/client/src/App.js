@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import Main from './components/Main'
-import SubmitTicket from './components/SubmitTicket';
+import SubmitTicket from './components/TicketForm';
 
 
 class App extends Component {

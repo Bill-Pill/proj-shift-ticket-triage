@@ -37,21 +37,6 @@ class SubmitTicket extends Component {
           <div>
             <Row>
               <Col span={20} offset={2}>
-                <Form className='ticket-form'>
-                  <Form.Item style={{ color: 'yellow' }}
-                    label="Title">
-                    <Input
-                      name='title'
-                      onChange={ this.onChange } />
-                  </Form.Item>
-                  <Form.Item
-                    label="Details">
-                    <TextArea 
-                      rows={15}
-                      name='details'
-                      onChange={ this.onChange } />
-                  </Form.Item>
-                </Form>
               </Col>
             </Row>
           </div>
@@ -61,11 +46,11 @@ class SubmitTicket extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-  //  tickets: state.tickets
-  state
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//   //  tickets: state.tickets
+//   state
+//   };
+// };
 
-export default (connect(mapStateToProps)(SubmitTicket));
+export default (connect(null)(SubmitTicket));

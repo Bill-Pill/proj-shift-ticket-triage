@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { fetchTickets } from "../actions"
-import { Steps, Row, Col } from 'antd'
+import { Row, Col, Layout, Breadcrumb } from 'antd'
+import TicketForm from './TicketForm'
+import TicketProgress from './TicketProgress'
+
+const { Header, Content, Footer, Sider } = Layout;
 
 class Main extends Component {
+  state = {
+    collapsed: false,
+  };
+
+  onCollapse = collapsed => {
+    this.setState({ collapsed });
+  };
 
   componentDidMount() {
     this.props.fetchTickets()
@@ -20,30 +31,36 @@ class Main extends Component {
   }
 
   render() {
-    const { Step } = Steps;
 
     return (
-      <div>
-        Hi I'm the main component. Ticket data below:
-        {this.renderTickets()}
-        <div className="container-status">
-        <Row type="flex" align="middle" className="row-status">
-            <Col span={20} offset={2}>
-              <h3>Step progress bar changes to vertical on mobile. Animations??</h3>
-              <Steps current={2} status="error">
-                <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
-                <Step title="Resolving Issue" description="(USERNAME) is now hard at 
-                  work resolving the issue. --------------------
-                  ----------------- **COLORCHANGE** (USERNAME) is
-                  typing up a response"/>
-                <Step title="Response Requested" description="(USERNAME) has requested a response" />
-                <Step title="Issue Resolved" description="Huzzah! Ticket is now resolved and closed" />
-              </Steps>
-            </Col>
-            <Col span={2}></Col>
-          </Row>
-        </div>
-      </div>
+      <Layout style={{ minHeight: '100vh' }}>
+        <Layout>
+          <Header style={{ background: '#fff', padding: 0 }} />
+          <Content style={{ margin: '0 16px' }}>
+            <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb.Item>User</Breadcrumb.Item>
+              <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            </Breadcrumb>
+            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+              Hi I'm the main component. Ticket data below:
+              {this.renderTickets()}
+              <TicketProgress />
+            </div>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
+        </Layout>
+        <Sider width={500} reverseArrow
+          collapsible collapsed={this.state.collapsed} 
+          onCollapse={this.onCollapse}>
+          <div>
+            <Row>
+              <Col span={20} offset={2}>
+                <TicketForm />
+              </Col>
+            </Row>
+          </div>
+        </Sider>
+      </Layout>
     );
   }
 }
