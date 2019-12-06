@@ -5,8 +5,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import promise from 'redux-promise'
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducers";
-import './index.css';
 import App from './App';
+import "antd/dist/antd.css";
+import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 const storeWithMiddleware = applyMiddleware(promise)(createStore);
