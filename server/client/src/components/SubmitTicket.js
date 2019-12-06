@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Breadcrumb, Form, Input, Row, Col } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+const { TextArea } = Input;
 
-class SubmitTicket extends React.Component {
+
+class SubmitTicket extends Component {
   state = {
     collapsed: false,
   };
@@ -14,6 +15,7 @@ class SubmitTicket extends React.Component {
     console.log(collapsed);
     this.setState({ collapsed });
   };
+
 
   render() {
     return (
@@ -29,47 +31,32 @@ class SubmitTicket extends React.Component {
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
         </Layout>
-        <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-          <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1">
-              <Icon type="pie-chart" />
-              <span>Option 1</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="desktop" />
-              <span>Option 2</span>
-            </Menu.Item>
-            <SubMenu
-              key="sub1"
-              title={
-                <span>
-                  <Icon type="user" />
-                  <span>User</span>
-                </span>
-              }
-            >
-              <Menu.Item key="3">Tom</Menu.Item>
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub2"
-              title={
-                <span>
-                  <Icon type="team" />
-                  <span>Team</span>
-                </span>
-              }
-            >
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
-            </SubMenu>
-            <Menu.Item key="9">
-              <Icon type="file" />
-              <span>File</span>
-            </Menu.Item>
-          </Menu>
+        <Sider width={500} reverseArrow={true} collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
+          <div>
+            <Row>
+              <Col span={20} offset={2}>
+                <Form className='ticket-form'>
+                  <Form.Item style={{ color: 'yellow' }}
+                    label="Title"
+                    validateStatus='error'
+                    help='Oh no! Did you forget to include a title?'>
+                    <Input
+                      name='title'
+                      onChange={ this.onChange } />
+                  </Form.Item>
+                  <Form.Item
+                    label="Details"
+                    validateStatus='error'
+                    help='Oh no! Did you forget to include details?'>
+                    <TextArea 
+                      rows={25}
+                      name='details'
+                      onChange={ this.onChange } />
+                  </Form.Item>
+                </Form>
+              </Col>
+            </Row>
+          </div>
         </Sider>
       </Layout>
     );
@@ -83,4 +70,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(SubmitTicket);
+export default (connect(mapStateToProps)(SubmitTicket));
