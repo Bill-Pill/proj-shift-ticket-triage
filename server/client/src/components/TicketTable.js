@@ -39,8 +39,8 @@ const columns = [
   },
   {
     title: 'Ticket Submit Date',
-    dataIndex: 'date',
-    key: 'date'
+    dataIndex: 'added',
+    key: 'added'
   },
 ]
 
