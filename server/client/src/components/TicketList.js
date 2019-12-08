@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { fetchTickets } from "../actions"
 import { Row, Col, Layout, Breadcrumb } from 'antd'
 import TicketForm from './TicketForm'
 import TicketTable from './TicketTable'
@@ -17,20 +16,6 @@ class TicketList extends Component {
   onCollapse = collapsed => {
     this.setState({ collapsed });
   };
-
-  componentDidMount() {
-    this.props.fetchTickets()
-  }
-
-  renderTickets() {
-    const items = []
-    const { tickets } = this.props;
-    tickets.forEach(t => {
-      items.push(<div key={t.ticketid}>{t.title}</div>)
-    })
-
-    return items
-  }
 
   render() {
 
@@ -75,10 +60,5 @@ class TicketList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-   tickets: state.tickets
-  };
-};
 
-export default connect(mapStateToProps, { fetchTickets })(TicketList);
+export default connect(null)(TicketList);
