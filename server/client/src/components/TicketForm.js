@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Layout, Form, Input} from 'antd';
+import { Form, Input} from 'antd';
 
 const { TextArea } = Input;
 
