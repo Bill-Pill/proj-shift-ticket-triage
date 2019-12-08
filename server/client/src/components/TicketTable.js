@@ -11,11 +11,14 @@ class TicketTable extends Component {
     this.props.fetchTickets()
   }
 
+  HandleRowClick(ticketid) {
+    console.log(ticketid)
+  }
 
   render() {
     return (
       <Table dataSource={this.props.tickets} rowKey="ticketid" onRow={r => ({
-        onClick: () => console.log('clicked ticketid is ', r.ticketid )
+        onClick: () => this.HandleRowClick(r.ticketid)
       })}>
         <Column title="Ticket ID" dataIndex="ticketid" key="ticketid" />
         <Column title="Status" dataIndex="statuscode" key="statuscode" />
