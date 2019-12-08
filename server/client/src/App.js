@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import Main from './components/Main'
-import SubmitTicket from './components/TicketForm';
+import TicketList from './components/TicketList'
 
 
 class App extends Component {
@@ -10,7 +10,7 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path="/" component={Main} />
-          <Route exact path="/ticketform" component={SubmitTicket} />
+          <Route exact path="/ticketlist" component={TicketList} />
         </Switch>
       </div>
     );
