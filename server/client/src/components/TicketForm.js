@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Form, Input, Button, Icon} from 'antd';
+import { Form, Input, Button, Icon, Radio} from 'antd';
+import ButtonGroup from 'antd/lib/button/button-group';
 
 const { TextArea } = Input;
 
@@ -15,10 +16,19 @@ class TicketForm extends Component {
             name='title'
             onChange={ this.onChange } />
         </Form.Item>
-        <Form.Item>
+        <Form.Item style={{ color: 'yellow' }}
+          label="Category">
           <div className="icons-list categories">
-            <Icon type="bug" style={{fontSize: '32px', color: 
+            <Radio.Group buttonStyle="solid" defaultValue="bug">
+              <Radio.Button value="bug"><Icon type="bug"/>Bug</Radio.Button>
+              <Radio.Button value="network"><Icon type="api"/>Internet/Network</Radio.Button>
+              <Radio.Button value="computer"><Icon type="laptop"/>Computer</Radio.Button>
+              <Radio.Button value="phone"><Icon type="phone"/>Phone</Radio.Button>
+              <Radio.Button value="software"><Icon type="dashboard"/>Software</Radio.Button>
+            </Radio.Group>
+            {/* <Button ghost><Icon type="bug" style={{fontSize: '32px', color: 
               '#3399FF'}} theme="outlined" />
+            </Button>
             <Icon type="api" style={{fontSize: '32px', color: 
               '#3399FF'}} theme="outlined" />
             <Icon type="laptop" style={{fontSize: '32px', color: 
@@ -26,7 +36,7 @@ class TicketForm extends Component {
             <Icon type="phone" style={{fontSize: '32px', color: 
               '#3399FF'}} theme="outlined" />
             <Icon type="dashboard" style={{fontSize: '32px', color: 
-              '#3399FF'}} theme="outlined" />
+              '#3399FF'}} theme="outlined" /> */}
           </div>
         </Form.Item>
         <Form.Item
