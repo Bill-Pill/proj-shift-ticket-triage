@@ -2,11 +2,11 @@ import axios from "axios";
 
 export const FETCH_TICKETS= "fetch_tickets";
 
-// const ROOT_URL = "/api";
+const ROOT_URL = "/api";
 
 export const fetchTickets = () => {
   const request = axios
-    .get(`/tickets`)
+    .get(`${ROOT_URL}/tickets`)
     .catch(function(error) {
       console.log("error: ", error);
     });
