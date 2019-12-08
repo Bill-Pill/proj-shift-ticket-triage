@@ -4,8 +4,7 @@ import { fetchTickets } from "../actions"
 import { Row, Col, Layout, Breadcrumb } from 'antd'
 import TicketForm from './TicketForm'
 import TicketProgress from './TicketProgress'
-
-import { Timeline } from 'antd';
+import StatusTimeline from './StatusTimeline'
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -47,18 +46,15 @@ class Main extends Component {
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
               Hi I'm the main component. Ticket data below:
               {this.renderTickets()}
-              <Timeline>
-                <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item>Solve initial network problems 2015-09-01</Timeline.Item>
-                <Timeline.Item>Technical testing 2015-09-01</Timeline.Item>
-                <Timeline.Item>Network problems being solved 2015-09-01</Timeline.Item>
-              </Timeline>
               <div className="container-status">
                 <Row type="flex" align="middle" className="row-status">
-                  <Col span={20} offset={2}>
+                  <Col span={4}>
+                    <h3>Status Feed</h3>
+                    <StatusTimeline />
+                  </Col>
+                  <Col span={20}>
                     <TicketProgress />
                   </Col>
-                  <Col span={2}></Col>
                 </Row>
               </div>
             </div>

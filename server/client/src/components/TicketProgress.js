@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Steps, Row, Col } from 'antd'
+import { Steps } from 'antd'
 
 const { Step } = Steps;
 
