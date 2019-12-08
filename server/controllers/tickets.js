@@ -10,10 +10,23 @@ const getTicketData = (req, res, db) => {
     .catch(err => res.status(400).json({dbError: 'db error'}))
 }
 
+const getTicketDetails = (req, res, db, ticketid) => {
+  db.select('*').from('tickets').where('ticketid', ticketid)
+  .then(items => {
+    if(items.length){
+      res.json(items)
+    } else {
+      res.json({dataExists: 'false'})
+    }
+  })
+  .catch(err => res.status(400).json({dbError: 'db error'}))
+}
+
 const postTicketData = (req, res, db) => {
   const { title, category, ticketdetails, department, email } = req.body
   const added = new Date()
-  db('tickets').insert({title, category, ticketdetails, department, email, added})
+  const statuscode = 0;
+  db('tickets').insert({title, category, ticketdetails, department, email, added, statuscode})
     .returning('*')
     .then(item => {
       res.json(item)
@@ -42,6 +55,7 @@ const deleteTicketData = (req, res, db) => {
 
 module.exports = {
   getTicketData,
+  getTicketDetails,
   postTicketData,
   putTicketData,
   deleteTicketData
