@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Form, Input, Button, Icon, Radio} from 'antd';
-import ButtonGroup from 'antd/lib/button/button-group';
+import { Form, Input, Icon, Radio} from 'antd';
 
 const { TextArea } = Input;
 

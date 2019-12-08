@@ -1,37 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { fetchTickets } from "../actions"
-import { Table, Divider, Tag } from 'antd';
+import { Table} from 'antd';
 
 const { Column } = Table;
-
-const data = [
-  {
-    key: '1',
-    firstName: 'John',
-    lastName: 'Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    firstName: 'Jim',
-    lastName: 'Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    firstName: 'Joe',
-    lastName: 'Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
-
 
 class TicketTable extends Component {
 
@@ -42,7 +14,9 @@ class TicketTable extends Component {
 
   render() {
     return (
-      <Table dataSource={this.props.tickets}>
+      <Table dataSource={this.props.tickets} rowKey="ticketid" onRow={r => ({
+        onClick: () => console.log('clicked ticketid is ', r.ticketid )
+      })}>
         <Column title="Ticket ID" dataIndex="ticketid" key="ticketid" />
         <Column title="Status" dataIndex="statuscode" key="statuscode" />
         <Column title="Title" dataIndex="title" key="title" />

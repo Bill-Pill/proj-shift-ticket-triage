@@ -43,12 +43,9 @@ class TicketList extends Component {
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
-            
-            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-              Hi I'm the TicketList component. Ticket data below:
-              {this.renderTickets()}
+            <div style={{ padding: 0, background: '#fff', minHeight: 360 }}>
               <div className="container-status">
-                <Row type="flex" align="middle" className="row-status">
+                <Row type="flex" className="row-status">
                   <Col span={4}>
                     <h3>Status Feed</h3>
                     <StatusTimeline />
