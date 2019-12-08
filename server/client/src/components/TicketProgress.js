@@ -9,9 +9,18 @@ class TicketProgress extends Component {
     currentStep: 0
   };
 
+  currentStep = () => {
+    if (!this.props.ticketDetails[0]) {
+      return 0
+    } else {
+      return this.props.ticketDetails[0].statuscode
+    }
+  }
+
   render() {
+    console.log('progress bar render props ', this.props)
     return (
-      <Steps current={this.state.currentStep} status="process">
+      <Steps current={this.currentStep()} status="process">
         <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
         <Step title="Resolving Issue" description="(USERNAME) is now hard at 
           work resolving the issue. --------------------
@@ -25,4 +34,10 @@ class TicketProgress extends Component {
 }
 
 
-export default connect(null)(TicketProgress);
+const mapStateToProps = state => {
+  return {
+   ticketDetails: state.details
+  };
+};
+
+export default connect(mapStateToProps)(TicketProgress);

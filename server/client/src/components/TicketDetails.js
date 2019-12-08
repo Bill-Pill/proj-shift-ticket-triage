@@ -40,7 +40,6 @@ class TicketDetails extends Component {
   }
 
   render() {
-    console.log('detail props ', this.props)
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Layout>
