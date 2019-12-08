@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Form, Input} from 'antd';
+import { Form, Input, Button, Icon} from 'antd';
 
 const { TextArea } = Input;
 
@@ -14,6 +14,20 @@ class TicketForm extends Component {
           <Input
             name='title'
             onChange={ this.onChange } />
+        </Form.Item>
+        <Form.Item>
+          <div className="icons-list categories">
+            <Icon type="bug" style={{fontSize: '32px', color: 
+              '#3399FF'}} theme="outlined" />
+            <Icon type="api" style={{fontSize: '32px', color: 
+              '#3399FF'}} theme="outlined" />
+            <Icon type="laptop" style={{fontSize: '32px', color: 
+              '#3399FF'}} theme="outlined" />
+            <Icon type="phone" style={{fontSize: '32px', color: 
+              '#3399FF'}} theme="outlined" />
+            <Icon type="dashboard" style={{fontSize: '32px', color: 
+              '#3399FF'}} theme="outlined" />
+          </div>
         </Form.Item>
         <Form.Item
           label="Details">

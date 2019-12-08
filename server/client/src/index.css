@@ -28,3 +28,31 @@ code {
 .ant-layout-sider-collapsed .ticket-form {
   display: none;
 }
+
+.material-icons.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.first-i {
+  left: 0%;
+  position: relative;
+}
+
+.second-i {
+  left: 20%;
+  position: relative;
+}
+
+.third-i {
+  left: 40%;
+  position: relative;
+}
+
+.fourth-i {
+  left: 60%;
+  position: relative;
+}
