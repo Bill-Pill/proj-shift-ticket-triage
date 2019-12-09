@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { fetchTicketDetails } from "../actions"
-import { Row, Col, Layout, Breadcrumb } from 'antd'
+import { Row, Col, Layout, Breadcrumb, Form, Input } from 'antd'
 import TicketForm from './TicketForm'
 import StatusTimeline from './StatusTimeline'
 import TicketProgress from './TicketProgress'
 
 const { Header, Content, Footer, Sider } = Layout;
+const { TextArea } = Input;
 
 
 class TicketDetails extends Component {
@@ -61,6 +62,18 @@ class TicketDetails extends Component {
                     <TicketProgress />
                   </Col>
                 </Row>
+                <div>
+                  <Form>
+                    <Form.Item
+                      label="Test Ticket Response">
+                      <TextArea 
+                        rows={10}
+                        name='response'
+                        onChange={ this.onChange } />
+                    </Form.Item>
+                  </Form>
+                  
+                </div>
               </div>
             </div>
           </Content>
