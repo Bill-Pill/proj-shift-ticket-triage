@@ -19,11 +19,11 @@ class TicketForm extends Component {
           label="Category">
           <div className="icons-list categories">
             <Radio.Group buttonStyle="solid" defaultValue="bug">
-              <Radio.Button value="bug"><Icon type="bug"/>Bug</Radio.Button>
-              <Radio.Button value="network"><Icon type="api"/>Internet/Network</Radio.Button>
-              <Radio.Button value="computer"><Icon type="laptop"/>Computer</Radio.Button>
-              <Radio.Button value="phone"><Icon type="phone"/>Phone</Radio.Button>
-              <Radio.Button value="software"><Icon type="dashboard"/>Software</Radio.Button>
+              <Radio.Button value="Bug"><Icon type="bug"/>Bug</Radio.Button>
+              <Radio.Button value="Network"><Icon type="api"/>Internet/Network</Radio.Button>
+              <Radio.Button value="Computer"><Icon type="laptop"/>Computer</Radio.Button>
+              <Radio.Button value="Phone"><Icon type="phone"/>Phone</Radio.Button>
+              <Radio.Button value="Software"><Icon type="dashboard"/>Software</Radio.Button>
             </Radio.Group>
             {/* <Button ghost><Icon type="bug" style={{fontSize: '32px', color: 
               '#3399FF'}} theme="outlined" />

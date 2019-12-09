@@ -1,4 +1,5 @@
 import axios from "axios";
+const uuidv4 = require('uuid/v4')
 
 export const FETCH_TICKETS= "fetch_tickets";
 export const FETCH_TICKET_DETAILS= "fetch_ticket_details";
@@ -56,5 +57,18 @@ export const logOutOfStore = (callback) => {
   return {
     type: LOGOUT,
     payload: ''
+  }
+}
+
+export const loginAsDemo = (callback) => {
+
+  let demoObj = { username:uuidv4(), isAdmin: false, isDemo: true}
+
+  localStorage.setItem('username', demoObj.username)
+  localStorage.setItem('isDemo', true)
+  callback()
+  return {
+    type: LOGIN,
+    payload: demoObj
   }
 }

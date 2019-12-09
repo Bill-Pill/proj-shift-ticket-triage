@@ -6,8 +6,8 @@ import { loginToStore, logOutOfStore } from "../actions"
 const { Header } = Layout;
 
 const logoStyle = {
-  'font-family': 'Raleway',
-  'font-size': '30px',
+  fontFamily: 'Raleway',
+  fontSize: '30px',
   color: 'gray',
   width: '120px',
   height: '31px',
@@ -23,12 +23,12 @@ class HeaderNav extends Component {
       <Header>
         <div className="logo" style={logoStyle}>WIP
           <Icon type="plus-square" theme="filled" 
-            style={{display:'inline', 'font-size': '30px'}}/>TRIAGE</div>
+            style={{display:'inline', fontSize: '30px'}}/>TRIAGE</div>
         <Menu
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['2']}
-          style={{ lineHeight: '64px', float: 'right', 'margin-right': '250px' }}
+          style={{ lineHeight: '64px', float: 'right', marginRight: '250px' }}
         >
           <Menu.Item key="1">nav 1</Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Row, Col, Layout, Breadcrumb } from 'antd'
-import TicketForm from './TicketForm'
+import SiderRight from './SiderRight'
 import TicketTable from './TicketTable'
 import StatusTimeline from './StatusTimeline'
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer } = Layout;
 
 
 class TicketList extends Component {
@@ -20,9 +20,8 @@ class TicketList extends Component {
   render() {
 
     return (
-      <Layout style={{ minHeight: '100vh' }}>
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
+      <Layout>
+        <Layout style={{ padding: '0 24px 24px' }}>
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
@@ -32,7 +31,7 @@ class TicketList extends Component {
               <div className="container-status">
                 <Row type="flex" className="row-status">
                   <Col span={4}>
-                    <h3>Status Feed</h3>
+                    <h3>Status Feed(maybe not needed on list)</h3>
                     <StatusTimeline />
                   </Col>
                   <Col span={20}>
@@ -43,18 +42,8 @@ class TicketList extends Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
-        </Layout>
-        <Sider width={350} reverseArrow
-          collapsible collapsed={this.state.collapsed} 
-          onCollapse={this.onCollapse}>
-          <div>
-            <Row>
-              <Col span={20} offset={2}>
-                <TicketForm />
-              </Col>
-            </Row>
-          </div>
-        </Sider>
+          </Layout>
+        <SiderRight />
       </Layout>
     );
   }

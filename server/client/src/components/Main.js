@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { loginToStore, logOutOfStore } from "../actions"
+import { loginToStore, logOutOfStore, loginAsDemo } from "../actions"
 import { Row, Col, Layout, Breadcrumb, Menu, Icon } from 'antd'
 import TicketForm from './TicketForm'
 import SiderRight from './SiderRight'
@@ -44,13 +44,21 @@ class Main extends Component {
     })
   }
 
-
-
   handleTest = () => {
     alert('handling modal button click')
     this.setState({
       visible: false,
     });
+  }
+
+  handleDemoLoginClick = (callback) => {
+    this.props.loginAsDemo(() => {
+      this.props.history.push('/tickets')
+    })
+    this.setState({
+      visible: false
+    })
+
   }
 
   handleLogout = () => {
@@ -65,6 +73,10 @@ class Main extends Component {
   componentDidMount() {
     if (!this.props.auth.username) {
       this.showModal()
+    }
+
+    if (this.props.auth.isDemo) {
+      alert("Welcome to the demo!")
     }
   }
 
@@ -89,14 +101,18 @@ class Main extends Component {
                   visible={this.state.visible}
                   title="Title"
                   footer={[
-                    <Button key="adminlogin" type="danger"
-                      onClick={this.handleLogin}>
-                      Login as Admin
-                    </Button>,
-                    <Button key="userlogin" type="primary" 
-                      onClick={this.handleTest}>
-                      Login as User
-                    </Button>,
+                    // <Button key="adminlogin" type="danger"
+                    //   onClick={this.handleLogin}>
+                    //   Login as Admin
+                    // </Button>,
+                    // <Button key="userlogin" type="primary" 
+                    //   onClick={this.handleTest}>
+                    //   Login as User
+                    // </Button>,
+                    <Button key="demologin" type="primary" 
+                      onClick={this.handleDemoLoginClick}>
+                      Demo!
+                    </Button>
                   ]}
                 >
                   <p>Don't worry - you won't break anything.</p>
@@ -117,4 +133,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { loginToStore, logOutOfStore })(Main);
+export default connect(mapStateToProps, { loginToStore, logOutOfStore, loginAsDemo })(Main);

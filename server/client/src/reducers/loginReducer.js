@@ -1,7 +1,8 @@
 import { LOGIN, LOGOUT } from '../actions'
 
 const DEFAULT_STATE = {
-  username: localStorage.getItem('username') || ''
+  username: localStorage.getItem('username') || '',
+  isDemo: localStorage.getItem('isDemo')
 }
 
 export default function(state = DEFAULT_STATE, action) {
