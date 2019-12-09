@@ -36,17 +36,25 @@ export const fetchTicketDetails = (ticketid) => {
 // definitely unsecure storing of login info
 // without password use
 export const loginToStore = (username) => {
-  let userObj = {
-    username,
-    isAdmin: false
-  }
+  let userObj = { username, isAdmin: false }
 
   if (username === 'admin') {
     userObj.isAdmin = true;
   }
+  // Ghetto localStorage to persist login. Would obviously change
   localStorage.setItem('username', username)
+
   return {
     type: LOGIN,
     payload: userObj
+  }
+}
+
+export const logOutOfStore = (callback) => {
+  localStorage.removeItem('username')
+  callback()
+  return {
+    type: LOGOUT,
+    payload: ''
   }
 }

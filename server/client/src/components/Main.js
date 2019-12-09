@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { loginToStore } from "../actions"
+import { loginToStore, logOutOfStore } from "../actions"
 import { Row, Col, Layout, Breadcrumb } from 'antd'
 import TicketForm from './TicketForm'
 import { Modal, Button } from 'antd';
@@ -52,6 +52,15 @@ class Main extends Component {
     });
   }
 
+  handleLogout = () => {
+    this.props.logOutOfStore(() => {
+      this.props.history.push('/')
+      this.setState({
+        visible: true,
+      });
+    })
+  }
+
   componentDidMount() {
     if (!this.props.auth.username) {
       this.showModal()
@@ -72,6 +81,9 @@ class Main extends Component {
             
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
               Hi I'm the main component.
+              <Button onClick={this.handleLogout}>
+                Logout
+              </Button>
                 <Modal
                   visible={this.state.visible}
                   title="Title"
@@ -114,4 +126,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { loginToStore })(Main);
+export default connect(mapStateToProps, { loginToStore, logOutOfStore })(Main);
