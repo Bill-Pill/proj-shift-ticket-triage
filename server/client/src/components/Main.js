@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { fetchTickets } from "../actions"
+import { loginToStore } from "../actions"
 import { Row, Col, Layout, Breadcrumb } from 'antd'
 import TicketForm from './TicketForm'
 import { Modal, Button } from 'antd';
@@ -11,7 +11,7 @@ const { Header, Content, Footer, Sider } = Layout;
 class Main extends Component {
   state = {
     collapsed: false,
-    visible: true
+    visible: false
   };
 
   showModal = () => {
@@ -20,19 +20,26 @@ class Main extends Component {
     });
   };
 
-  handleOk = e => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
-  };
+  // handleOk = e => {
+  //   console.log(e);
+  //   this.setState({
+  //     visible: false,
+  //   });
+  // };
 
-  handleCancel = e => {
-    console.log(e);
+  // handleCancel = e => {
+  //   console.log(e);
+  //   this.setState({
+  //     visible: false,
+  //   });
+  // };
+
+  handleLogin = () => {
+    this.props.loginToStore('admin')
     this.setState({
-      visible: false,
-    });
-  };
+      visible: false
+    })
+  }
 
   onCollapse = collapsed => {
     this.setState({ collapsed });
@@ -46,11 +53,13 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchTickets()
+    if (!this.props.auth.username) {
+      this.showModal()
+    }
   }
 
   render() {
-
+    console.log('main render props ', this.props)
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Layout>
@@ -68,7 +77,7 @@ class Main extends Component {
                   title="Title"
                   footer={[
                     <Button key="adminlogin" type="danger"
-                      onClick={this.handleTest}>
+                      onClick={this.handleLogin}>
                       Login as Admin
                     </Button>,
                     <Button key="userlogin" type="primary" 
@@ -101,8 +110,8 @@ class Main extends Component {
 
 const mapStateToProps = state => {
   return {
-   tickets: state.tickets
+   auth: state.auth
   };
 };
 
-export default connect(mapStateToProps, { fetchTickets })(Main);
+export default connect(mapStateToProps, { loginToStore })(Main);
