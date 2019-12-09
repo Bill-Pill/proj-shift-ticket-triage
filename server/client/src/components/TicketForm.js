@@ -14,6 +14,7 @@ class TicketForm extends Component {
           label="Title">
           <Input
             name='title'
+            placeholder='Why is my computer on fire?'
             onChange={ this.onChange } />
         </Form.Item>
         <Form.Item
@@ -31,6 +32,7 @@ class TicketForm extends Component {
         <Form.Item
           label="Details">
           <TextArea 
+            placeholder="My computer is unplugged but I'm not getting any power for some reason."
             rows={10}
             name='details'
             onChange={ this.onChange } />
