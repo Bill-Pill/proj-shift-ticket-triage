@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { fetchTicketDetails } from "../actions"
-import { Row, Col, Layout, Breadcrumb, Form, Input } from 'antd'
-import TicketForm from './TicketForm'
+import { Row, Col, Layout, Breadcrumb, Input } from 'antd'
 import StatusTimeline from './StatusTimeline'
 import TicketProgress from './TicketProgress'
+import SiderRight from './SiderRight'
 import io from 'socket.io-client'
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -132,19 +132,9 @@ class TicketDetails extends Component {
               </div>
             </div>
           </Content>
-          {/* <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer> */}
+          <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
         </Layout>
-        <Sider width={350} reverseArrow
-          collapsible collapsed={this.state.collapsed} 
-          onCollapse={this.onCollapse}>
-          <div>
-            <Row>
-              <Col span={20} offset={2}>
-                <TicketForm />
-              </Col>
-            </Row>
-          </div>
-        </Sider>
+        <SiderRight />
       </Layout>
     );
   }

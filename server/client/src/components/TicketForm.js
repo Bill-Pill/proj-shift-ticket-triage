@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Form, Input, Icon, Radio} from 'antd';
+import { Form, Input, Icon, Radio, Button} from 'antd';
 
 const { TextArea } = Input;
 
@@ -9,16 +9,17 @@ class TicketForm extends Component {
   render() {
     return (
       <Form className='ticket-form'>
-        <Form.Item style={{ color: 'yellow' }}
+        <h3 style={{ color: 'yellowgreen' }}>Create a Ticket</h3>
+        <Form.Item
           label="Title">
           <Input
             name='title'
             onChange={ this.onChange } />
         </Form.Item>
-        <Form.Item style={{ color: 'yellow' }}
+        <Form.Item
           label="Category">
           <div className="icons-list categories">
-            <Radio.Group buttonStyle="solid" defaultValue="bug">
+            <Radio.Group buttonStyle="solid" defaultValue="Bug">
               <Radio.Button value="Bug"><Icon type="bug"/>Bug</Radio.Button>
               <Radio.Button value="Network"><Icon type="api"/>Internet/Network</Radio.Button>
               <Radio.Button value="Computer"><Icon type="laptop"/>Computer</Radio.Button>
@@ -30,9 +31,14 @@ class TicketForm extends Component {
         <Form.Item
           label="Details">
           <TextArea 
-            rows={15}
+            rows={10}
             name='details'
             onChange={ this.onChange } />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     );
