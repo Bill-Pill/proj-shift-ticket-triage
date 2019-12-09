@@ -8,7 +8,7 @@ const { Sider } = Layout;
 
 class SiderRight extends Component {
   state = {
-    collapsed: false,
+    collapsed: true,
     visible: false
   };
 

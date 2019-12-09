@@ -1,21 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import { loginToStore, logOutOfStore } from "../actions"
 
 const { Header } = Layout;
+
+const logoStyle = {
+  'font-family': 'Raleway',
+  'font-size': '30px',
+  color: 'gray',
+  width: '120px',
+  height: '31px',
+  background: 'rgba(255, 255, 255, 0.2)',
+  margin: '16px 24px 16px 0',
+  display: 'inline-block'
+}
 
 class HeaderNav extends Component {
 
   render() {
     return (
       <Header>
-        <div className="logo" />
+        <div className="logo" style={logoStyle}>TICKET
+          <Icon type="plus-square" theme="filled" 
+            style={{display:'inline', 'font-size': '30px'}}/>TRIAGE</div>
         <Menu
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['2']}
-          style={{ lineHeight: '64px' }}
+          style={{ lineHeight: '64px', float: 'right', 'margin-right': '250px' }}
         >
           <Menu.Item key="1">nav 1</Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>
