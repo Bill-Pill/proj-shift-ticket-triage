@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { loginToStore, logOutOfStore } from "../actions"
 import { Row, Col, Layout, Breadcrumb, Menu, Icon } from 'antd'
 import TicketForm from './TicketForm'
+import SiderRight from './SiderRight'
 import { Modal, Button } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
 
@@ -43,9 +44,7 @@ class Main extends Component {
     })
   }
 
-  onCollapse = collapsed => {
-    this.setState({ collapsed });
-  };
+
 
   handleTest = () => {
     alert('handling modal button click')
@@ -106,17 +105,7 @@ class Main extends Component {
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
       </Layout>
-      <Sider width={350} reverseArrow
-          collapsible collapsed={this.state.collapsed} 
-          onCollapse={this.onCollapse}>
-          <div>
-            <Row>
-              <Col span={20} offset={2}>
-                <TicketForm />
-              </Col>
-            </Row>
-          </div>
-      </Sider>
+      <SiderRight />
     </Layout>
     );
   }

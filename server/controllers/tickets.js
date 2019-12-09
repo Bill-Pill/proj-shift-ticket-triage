@@ -33,10 +33,10 @@ const putTicketStatus = (req, res, db, ticketid) => {
 }
 
 const postTicketData = (req, res, db) => {
-  const { title, category, ticketdetails, department, email } = req.body
+  const { title, category, ticketdetails, department, username } = req.body
   const added = new Date()
   const statuscode = 0;
-  db('tickets').insert({title, category, ticketdetails, department, email, added, statuscode})
+  db('tickets').insert({title, category, ticketdetails, department, username, added, statuscode})
     .returning('*')
     .then(item => {
       res.json(item)
