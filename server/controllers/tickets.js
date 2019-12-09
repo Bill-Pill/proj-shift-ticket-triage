@@ -54,10 +54,28 @@ const deleteTicketData = (req, res, db) => {
     .catch(err => res.status(400).json({dbError: 'db error'}))
 }
 
+
+
+//
+// Modified routes for demo use
+//
+const getDemoTicketData = (req, res, db, username) => {
+  db.select('*').from('tickets').where('username', username)
+    .then(items => {
+      if(items.length){
+        res.json(items)
+      } else {
+        res.json({dataExists: 'false'})
+      }
+    })
+    .catch(err => res.status(400).json({dbError: 'db error'}))
+}
+
 module.exports = {
   getTicketData,
   getTicketDetails,
   postTicketData,
   putTicketStatus,
-  deleteTicketData
+  deleteTicketData,
+  getDemoTicketData
 }

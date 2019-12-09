@@ -64,6 +64,12 @@ app.put('/api/ticket', (req, res) => tickets.putTicketData(req, res, db))
 
 app.delete('/api/ticket', (req, res) => tickets.deleteTicketData(req, res, db))
 
+// Demo routes
+app.get('/api/tickets/:demoid', (req, res) => {
+  const demoid = req.params.demoid
+  tickets.getDemoTicketData(req, res, db, demoid)
+})
+
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
   // like our main.js file, or main.css file!

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
-import { fetchTickets } from "../actions"
+import { fetchTickets, fetchDemoTickets } from "../actions"
 import { Table} from 'antd';
 
 // Schema used for Ticket Table component w/ Ant Design
@@ -27,11 +27,11 @@ const columns = [
     dataIndex: 'category',
     key: 'category'
   },
-  {
-    title: 'Username',
-    dataIndex: 'username',
-    key: 'username'
-  },
+  // {
+  //   title: 'Username',
+  //   dataIndex: 'username',
+  //   key: 'username'
+  // },
   {
     title: 'Department',
     dataIndex: 'department',
@@ -47,7 +47,9 @@ const columns = [
 class TicketTable extends Component {
 
   componentDidMount() {
-    this.props.fetchTickets()
+    if (this.props.auth.username) {
+      this.props.fetchDemoTickets(this.props.auth.username)
+    }
   }
 
   HandleRowClick(ticketid) {
@@ -55,6 +57,7 @@ class TicketTable extends Component {
   }
 
   render() {
+    console.log('ticket table props ', this.props)
     return (
       <Table dataSource={this.props.tickets} columns={columns}
         rowKey="ticketid">
@@ -65,8 +68,9 @@ class TicketTable extends Component {
 
 const mapStateToProps = state => {
   return {
-   tickets: state.tickets
+   tickets: state.tickets,
+   auth: state.auth
   };
 };
 
-export default connect(mapStateToProps, { fetchTickets })(TicketTable);
+export default connect(mapStateToProps, { fetchTickets, fetchDemoTickets })(TicketTable);

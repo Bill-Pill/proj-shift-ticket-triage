@@ -60,6 +60,7 @@ export const logOutOfStore = (callback) => {
   }
 }
 
+// Actions for demo use
 export const loginAsDemo = (callback) => {
 
   let demoObj = { username:uuidv4(), isAdmin: false, isDemo: true}
@@ -72,3 +73,15 @@ export const loginAsDemo = (callback) => {
     payload: demoObj
   }
 }
+
+export const fetchDemoTickets = (demoid) => {
+  const request = axios
+    .get(`${ROOT_URL}/tickets/${demoid}`)
+    .catch(function(error) {
+      console.log("error: ", error);
+    });
+  return {
+    type: FETCH_TICKETS,
+    payload: request
+  };
+};
