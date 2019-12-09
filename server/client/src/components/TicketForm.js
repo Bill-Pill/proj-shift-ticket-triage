@@ -25,17 +25,6 @@ class TicketForm extends Component {
               <Radio.Button value="Phone"><Icon type="phone"/>Phone</Radio.Button>
               <Radio.Button value="Software"><Icon type="dashboard"/>Software</Radio.Button>
             </Radio.Group>
-            {/* <Button ghost><Icon type="bug" style={{fontSize: '32px', color: 
-              '#3399FF'}} theme="outlined" />
-            </Button>
-            <Icon type="api" style={{fontSize: '32px', color: 
-              '#3399FF'}} theme="outlined" />
-            <Icon type="laptop" style={{fontSize: '32px', color: 
-              '#3399FF'}} theme="outlined" />
-            <Icon type="phone" style={{fontSize: '32px', color: 
-              '#3399FF'}} theme="outlined" />
-            <Icon type="dashboard" style={{fontSize: '32px', color: 
-              '#3399FF'}} theme="outlined" /> */}
           </div>
         </Form.Item>
         <Form.Item

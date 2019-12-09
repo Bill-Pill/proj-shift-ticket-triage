@@ -44,7 +44,6 @@ const postTicketData = (req, res, db) => {
     .catch(err => res.status(400).json({dbError: 'db error'}))
 }
 
-
 const deleteTicketData = (req, res, db) => {
   const { id } = req.body
   db('tickets').where({id}).del()
@@ -53,7 +52,6 @@ const deleteTicketData = (req, res, db) => {
     })
     .catch(err => res.status(400).json({dbError: 'db error'}))
 }
-
 
 
 //
