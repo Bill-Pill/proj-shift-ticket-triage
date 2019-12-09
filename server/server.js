@@ -1,4 +1,6 @@
+const http = require('http')
 const express = require('express')
+const SocketManager = require('./socketManager')
 
 // use process.env variables to keep private variables,
 require('dotenv').config()
@@ -10,14 +12,7 @@ const bodyParser = require('body-parser') // turns response into usable format
 const cors = require('cors')  // allows/disallows cross-site communication
 const morgan = require('morgan') // logs requests
 
-// db Connection w/ Heroku
-// const db = require('knex')({
-//   client: 'pg',
-//   connection: {
-//     connectionString: process.env.DATABASE_URL,
-//     ssl: true,
-//   }
-// });
+
 
 // db Connection bases on prod or dev build
 var db = require('knex')({
@@ -82,7 +77,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// Sockets & Express hookup
+const server = http.createServer(app)
+const io = module.exports.io = require('socket.io').listen(server)
+io.on('connection', SocketManager)
+
 // App Server Connection
-app.listen(process.env.PORT || 5000, () => {
+server.listen(process.env.PORT || 5000, () => {
   console.log(`app is running on port ${process.env.PORT || 5000}`)
 })
