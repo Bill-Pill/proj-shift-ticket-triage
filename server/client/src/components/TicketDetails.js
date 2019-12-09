@@ -10,7 +10,7 @@ import io from 'socket.io-client'
 const { Header, Content, Footer, Sider } = Layout;
 const { TextArea } = Input;
 
-const socketUrl = 'http://192.168.0.22:5000'
+const socketUrl = 'http://10.174.69.249:5000'
 
 class TicketDetails extends Component {
   state = {

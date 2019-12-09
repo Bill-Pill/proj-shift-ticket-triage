@@ -28,9 +28,9 @@ const columns = [
     key: 'category'
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
-    key: 'email'
+    title: 'Username',
+    dataIndex: 'username',
+    key: 'username'
   },
   {
     title: 'Department',
