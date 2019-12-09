@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { loginToStore, logOutOfStore } from "../actions"
-import { Row, Col, Layout, Breadcrumb } from 'antd'
+import { Row, Col, Layout, Breadcrumb, Menu, Icon } from 'antd'
 import TicketForm from './TicketForm'
 import { Modal, Button } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
+
+const { SubMenu } = Menu;
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -70,10 +72,10 @@ class Main extends Component {
   render() {
     console.log('main render props ', this.props)
     return (
-      <Layout style={{ minHeight: '100vh' }}>
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
-          <Content style={{ margin: '0 16px' }}>
+
+      <Layout>
+      <Layout style={{ padding: '0 24px 24px' }}>
+      <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
@@ -103,8 +105,8 @@ class Main extends Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
-        </Layout>
-        <Sider width={350} reverseArrow
+      </Layout>
+      <Sider width={350} reverseArrow
           collapsible collapsed={this.state.collapsed} 
           onCollapse={this.onCollapse}>
           <div>
@@ -114,8 +116,8 @@ class Main extends Component {
               </Col>
             </Row>
           </div>
-        </Sider>
-      </Layout>
+      </Sider>
+    </Layout>
     );
   }
 }
