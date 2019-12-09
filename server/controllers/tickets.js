@@ -22,6 +22,16 @@ const getTicketDetails = (req, res, db, ticketid) => {
   .catch(err => res.status(400).json({dbError: 'db error'}))
 }
 
+const putTicketStatus = (req, res, db, ticketid) => {
+  const statuscode = 1;
+  db('tickets').where({'ticketid': ticketid})
+    .update({'statuscode': statuscode})
+    .then(item => {
+      res.json(item)
+    })
+    .catch(err => res.status(400).json({dbError: 'db error'}))
+}
+
 const postTicketData = (req, res, db) => {
   const { title, category, ticketdetails, department, email } = req.body
   const added = new Date()

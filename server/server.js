@@ -52,12 +52,21 @@ app.use(morgan('combined')) // use 'tiny' or 'combined'
 
 // App Routes - Auth
 app.get('/api/tickets', (req, res) => tickets.getTicketData(req, res, db))
+
 app.get('/api/ticket/:ticketid', (req, res) => {
   const ticketid = req.params.ticketid
   tickets.getTicketDetails(req, res, db, ticketid)
 })
+
 app.post('/api/ticket', (req, res) => tickets.postTicketData(req, res, db))
+
+app.put('/api/ticket/:ticketid', (req, res) => {
+  const ticketid = req.params.ticketid
+  tickets.putTicketStatus(req, res, db, ticketid)
+})
+
 app.put('/api/ticket', (req, res) => tickets.putTicketData(req, res, db))
+
 app.delete('/api/ticket', (req, res) => tickets.deleteTicketData(req, res, db))
 
 if (process.env.NODE_ENV === 'production') {
