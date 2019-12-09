@@ -21,7 +21,7 @@ class HeaderNav extends Component {
   render() {
     return (
       <Header>
-        <div className="logo" style={logoStyle}>TICKET
+        <div className="logo" style={logoStyle}>WIP
           <Icon type="plus-square" theme="filled" 
             style={{display:'inline', 'font-size': '30px'}}/>TRIAGE</div>
         <Menu
