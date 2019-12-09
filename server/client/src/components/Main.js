@@ -3,32 +3,50 @@ import { connect } from "react-redux";
 import { fetchTickets } from "../actions"
 import { Row, Col, Layout, Breadcrumb } from 'antd'
 import TicketForm from './TicketForm'
-import TicketProgress from './TicketProgress'
-import StatusTimeline from './StatusTimeline'
+import { Modal, Button } from 'antd';
+import ButtonGroup from 'antd/lib/button/button-group';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 class Main extends Component {
   state = {
     collapsed: false,
+    visible: true
+  };
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
   };
 
   onCollapse = collapsed => {
     this.setState({ collapsed });
   };
 
-  componentDidMount() {
-    this.props.fetchTickets()
+  handleTest = () => {
+    alert('handling modal button click')
+    this.setState({
+      visible: false,
+    });
   }
 
-  renderTickets() {
-    const items = []
-    const { tickets } = this.props;
-    tickets.forEach(t => {
-      items.push(<div key={t.ticketid}>{t.title}</div>)
-    })
-
-    return items
+  componentDidMount() {
+    this.props.fetchTickets()
   }
 
   render() {
@@ -44,19 +62,23 @@ class Main extends Component {
             </Breadcrumb>
             
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-              Hi I'm the main component. Ticket data below:
-              {this.renderTickets()}
-              <div className="container-status">
-                <Row type="flex" align="middle" className="row-status">
-                  <Col span={4}>
-                    <h3>Status Feed</h3>
-                    <StatusTimeline />
-                  </Col>
-                  <Col span={20}>
-                    <TicketProgress />
-                  </Col>
-                </Row>
-              </div>
+              Hi I'm the main component.
+                <Modal
+                  visible={this.state.visible}
+                  title="Title"
+                  footer={[
+                    <Button key="adminlogin" type="danger"
+                      onClick={this.handleTest}>
+                      Login as Admin
+                    </Button>,
+                    <Button key="userlogin" type="primary" 
+                      onClick={this.handleTest}>
+                      Login as User
+                    </Button>,
+                  ]}
+                >
+                  <p>Don't worry - you won't break anything.</p>
+                </Modal>
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
