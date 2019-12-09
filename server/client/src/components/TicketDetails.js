@@ -5,24 +5,73 @@ import { Row, Col, Layout, Breadcrumb, Form, Input } from 'antd'
 import TicketForm from './TicketForm'
 import StatusTimeline from './StatusTimeline'
 import TicketProgress from './TicketProgress'
+import io from 'socket.io-client'
 
 const { Header, Content, Footer, Sider } = Layout;
 const { TextArea } = Input;
 
+const socketUrl = 'http://192.168.0.22:5000'
 
 class TicketDetails extends Component {
   state = {
     collapsed: false,
-  };
-
-  onCollapse = collapsed => {
-    this.setState({ collapsed });
+    socket: null,
+    user: null,
+    nickname:'',
+    error:''
   };
 
   componentDidMount() {
     const ticketid = this.props.match.params.ticketid
     this.props.fetchTicketDetails(ticketid)
+    this.initSocket()
   }
+
+  initSocket = () => {
+    const socket = io(socketUrl)
+    socket.on('connect', () => {
+      console.log('Sockets online')
+    })
+    this.setState({socket})
+  }
+
+  setUser = (user) => {
+    const { socket } = this.state
+    socket.emit("USER_CONNECTED", user)
+    this.setState({user})
+  }
+
+  setFormUser = ({user, isUser}) => {
+    console.log(user, isUser)
+    if(isUser) {
+      this.setState(this.state.error, 'name is taken')
+    } else {
+      this.setUser(user)
+    }
+  }
+
+  logout = () => {
+    const { socket } = this.state
+    socket.emit('LOGOUT')
+    this.setState({user:null})
+  }
+
+  onCollapse = collapsed => {
+    this.setState({ collapsed });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+
+    const{ socket } = this.state
+    const { nickname } = this.state
+    socket.emit('VERIFY_USER', nickname, this.setFormUser)
+  }
+
+  handleChange = (e) => {
+    this.setState({nickname:e.target.value})
+  }
+  
 
   renderTicketDetails() {
     if (this.props.ticketDetails[0]) {
@@ -41,6 +90,7 @@ class TicketDetails extends Component {
   }
 
   render() {
+    const { nickname, error } = this.state
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Layout>
@@ -62,22 +112,27 @@ class TicketDetails extends Component {
                     <TicketProgress />
                   </Col>
                 </Row>
-                <div>
-                  <Form>
-                    <Form.Item
-                      label="Test Ticket Response">
-                      <TextArea 
-                        rows={10}
-                        name='response'
-                        onChange={ this.onChange } />
-                    </Form.Item>
-                  </Form>
+                <div className="testing-login">
+                  <form onSubmit={this.handleSubmit}>
+                    <label>
+                      <h2>Whats nickname</h2>
+                    </label>
+                    <input ref={(input) => {this.textInput = input}}
+                      type="text"
+                      id="nickname"
+                      value={nickname}
+                      onChange={this.handleChange}
+                      placeholder={'neat username'}
+                      />
+                      <div className="error">{error ? error:null}</div>
+
+                  </form>
                   
                 </div>
               </div>
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
+          {/* <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer> */}
         </Layout>
         <Sider width={350} reverseArrow
           collapsible collapsed={this.state.collapsed} 
