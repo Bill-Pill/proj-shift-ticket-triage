@@ -23,9 +23,9 @@ const getTicketDetails = (req, res, db, ticketid) => {
 }
 
 const putTicketStatus = (req, res, db, ticketid) => {
-  const statuscode = 1;
+  const newStatusCode = req.body.newStatusCode;
   db('tickets').where({'ticketid': ticketid})
-    .update({'statuscode': statuscode})
+    .update({'statuscode': newStatusCode})
     .then(item => {
       res.json(item)
     })
@@ -44,15 +44,6 @@ const postTicketData = (req, res, db) => {
     .catch(err => res.status(400).json({dbError: 'db error'}))
 }
 
-const putTicketData = (req, res, db) => {
-  const { id, first, last, email, phone, location, hobby } = req.body
-  db('tickets').where({id}).update({first, last, email, phone, location, hobby})
-    .returning('*')
-    .then(item => {
-      res.json(item)
-    })
-    .catch(err => res.status(400).json({dbError: 'db error'}))
-}
 
 const deleteTicketData = (req, res, db) => {
   const { id } = req.body
@@ -67,6 +58,6 @@ module.exports = {
   getTicketData,
   getTicketDetails,
   postTicketData,
-  putTicketData,
+  putTicketStatus,
   deleteTicketData
 }
