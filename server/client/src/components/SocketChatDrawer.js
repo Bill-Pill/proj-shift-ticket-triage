@@ -67,4 +67,10 @@ class SocketChatDrawer extends Component {
   }
 }
 
-export default connect(null)(SocketChatDrawer);
+const mapStateToProps = state => {
+  return {
+   auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(SocketChatDrawer);
