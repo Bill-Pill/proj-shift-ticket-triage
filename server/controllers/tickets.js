@@ -41,7 +41,7 @@ const postTicketData = (req, res, db) => {
     .then(item => {
       res.json(item)
     })
-    .catch(err => res.status(400).json({dbError: 'db error'}))
+    .catch(err => res.status(400).json({dbError: err}))
 }
 
 const deleteTicketData = (req, res, db) => {

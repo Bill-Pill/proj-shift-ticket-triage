@@ -28,7 +28,7 @@ const app = express()
 
 app.use(helmet())
 app.use(cors())
-// app.use(bodyParser.json())
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -42,7 +42,12 @@ app.get('/api/ticket/:ticketid', (req, res) => {
   tickets.getTicketDetails(req, res, db, ticketid)
 })
 
-app.post('/api/ticket', (req, res) => tickets.postTicketData(req, res, db))
+app.post('/api/ticket', (req, res) => {
+  tickets.postTicketData(req, res, db)
+  }
+)
+
+
 
 app.put('/api/ticket/:ticketid', (req, res) => {
   const ticketid = req.params.ticketid
