@@ -33,6 +33,18 @@ export const fetchTicketDetails = (ticketid) => {
   };
 };
 
+export const updateTicketStatus = (ticketid, newStatusCode) => {
+  const request = axios
+    .put(`${ROOT_URL}/ticket/${ticketid}`, {newStatusCode})
+    .catch(function(error) {
+      console.log("error: ", error);
+    });
+    return {
+      type: FETCH_TICKET_DETAILS,
+      payload: request
+    };
+}
+
 // Normally there'd be some kind of auth here - due
 // to time constraints, currently using a hacky and
 // definitely unsecure storing of login info

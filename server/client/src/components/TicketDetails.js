@@ -7,8 +7,7 @@ import TicketProgress from './TicketProgress'
 import SiderRight from './SiderRight'
 import io from 'socket.io-client'
 
-const { Header, Content, Footer, Sider } = Layout;
-const { TextArea } = Input;
+const { Header, Content, Footer } = Layout;
 
 const socketUrl = 'http://10.174.69.249:5000'
 
@@ -92,8 +91,8 @@ class TicketDetails extends Component {
   render() {
     const { nickname, error } = this.state
     return (
-      <Layout style={{ minHeight: '100vh' }}>
-        <Layout>
+      <Layout>
+        <Layout style={{ padding: '0 24px 24px' }}>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -125,9 +124,7 @@ class TicketDetails extends Component {
                       placeholder={'neat username'}
                       />
                       <div className="error">{error ? error:null}</div>
-
                   </form>
-                  
                 </div>
               </div>
             </div>
