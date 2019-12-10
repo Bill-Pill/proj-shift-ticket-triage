@@ -39,7 +39,13 @@ class TicketForm extends Component {
     } else {
       const demoUser = this.props.auth.username
       submitDemoTicket(this.state, demoUser, () =>{
+        // Routes to ticket list on submit.
+        // Logic dependant on current page
+        if(this.props.history.location.pathname !== '/tickets') {
           this.props.history.push('/tickets')
+        } else {
+          window.location.reload();
+        }
       })
     }
   }
