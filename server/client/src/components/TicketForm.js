@@ -5,10 +5,25 @@ import { Form, Input, Icon, Radio, Button} from 'antd';
 const { TextArea } = Input;
 
 class TicketForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      title: '',
+      category: '',
+      department: 'Testing',
+      ticketdetails: ''
+    };
+  }
+
+  onChange = (e) => {
+    const target = e.target;
+    console.log(target)
+  }
 
   render() {
     return (
-      <Form className='ticket-form'>
+      <Form className='ticket-form' onSubmit={this.handleSubmit}>
         <h3 style={{ color: 'yellowgreen' }}>Create a Ticket</h3>
         <Form.Item
           label="Title">
