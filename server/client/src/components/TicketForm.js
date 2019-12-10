@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import { Form, Input, Icon, Radio, Button} from 'antd';
+import { submitDemoTicket } from '../actions'
 
 const { TextArea } = Input;
 
@@ -30,6 +32,17 @@ class TicketForm extends Component {
     }
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    if (this.state.title == '' || this.state.ticketdetails == '') {
+      alert('Please type some text in the fields to continue')
+    } else {
+      const demoUser = this.props.auth.username
+      submitDemoTicket(this.state, demoUser, () =>{
+          this.props.history.push('/tickets')
+      })
+    }
+  }
   render() {
     console.log('default state: ', this.state)
     return (
@@ -72,11 +85,10 @@ class TicketForm extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//   //  tickets: state.tickets
-//   state
-//   };
-// };
+const mapStateToProps = state => {
+  return {
+   auth: state.auth
+  };
+};
 
-export default connect(null)(TicketForm);
+export default withRouter(connect(mapStateToProps, { submitDemoTicket })(TicketForm));

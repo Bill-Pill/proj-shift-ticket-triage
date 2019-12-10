@@ -5,6 +5,7 @@ export const FETCH_TICKETS= "fetch_tickets";
 export const FETCH_TICKET_DETAILS= "fetch_ticket_details";
 export const LOGIN = 'login'
 export const LOGOUT = 'logout'
+export const SUBMIT_TICKET = 'submit_ticket'
 
 const ROOT_URL = "/api";
 
@@ -85,3 +86,17 @@ export const fetchDemoTickets = (demoid) => {
     payload: request
   };
 };
+
+export const submitDemoTicket = (values, user, callback) => {
+  values.username = user;
+  const request = axios
+    .post(`${ROOT_URL}/ticket`, values)
+    .catch(function(error) {
+      console.log("error: ", error);
+    });
+    request.then(() => callback())
+    return {
+      type: SUBMIT_TICKET,
+      payload: request
+    };
+}

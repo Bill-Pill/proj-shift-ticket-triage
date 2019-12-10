@@ -59,7 +59,7 @@ class TicketTable extends Component {
   render() {
     console.log('ticket table props ', this.props)
     return (
-      <Table dataSource={this.props.tickets} columns={columns}
+      <Table dataSource={this.props.tickets || []} columns={columns}
         rowKey="ticketid">
       </Table>
     )
