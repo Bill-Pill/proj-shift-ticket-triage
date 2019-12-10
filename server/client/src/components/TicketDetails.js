@@ -23,7 +23,15 @@ class TicketDetails extends Component {
   componentDidMount() {
     const ticketid = this.props.match.params.ticketid
     this.props.fetchTicketDetails(ticketid)
+
+    this.isDemoUser()
     this.initSocket()
+  }
+
+  isDemoUser = () => {
+    if (this.props.auth.username && this.props.auth.isDemo) {
+      console.log("Confirmed as demo user!")
+    }
   }
 
   initSocket = () => {
@@ -139,7 +147,8 @@ class TicketDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-   ticketDetails: state.details
+   ticketDetails: state.details,
+   auth: state.auth
   };
 };
 
