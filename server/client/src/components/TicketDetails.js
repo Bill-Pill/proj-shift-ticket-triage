@@ -5,6 +5,7 @@ import { Row, Col, Layout, Breadcrumb, Input } from 'antd'
 import StatusTimeline from './StatusTimeline'
 import TicketProgress from './TicketProgress'
 import SiderRight from './SiderRight'
+import SocketChatDrawer from './SocketChatDrawer'
 
 const { Header, Content, Footer } = Layout;
 
@@ -80,6 +81,8 @@ class TicketDetails extends Component {
               </div>
             </div>
           </Content>
+            {/* <SocketChatDrawer /> */}
+          
           <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
         </Layout>
         <SiderRight />

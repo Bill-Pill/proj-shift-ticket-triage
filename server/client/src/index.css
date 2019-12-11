@@ -64,3 +64,10 @@ code {
   margin: 16px 28px 16px 0;
   float: left;
 }
+
+.chat-box {
+  height: 200px;
+  width: 18%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
