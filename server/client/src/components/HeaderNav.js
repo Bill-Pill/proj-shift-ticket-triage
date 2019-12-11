@@ -21,7 +21,6 @@ const logoStyle = {
 class HeaderNav extends Component {
 
   render() {
-    console.log('header nav props: ', this.props)
     return (
       <Header>
         <div className="logo" style={logoStyle}>WIP

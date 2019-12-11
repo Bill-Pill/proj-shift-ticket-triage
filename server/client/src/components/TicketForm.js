@@ -50,7 +50,6 @@ class TicketForm extends Component {
     }
   }
   render() {
-    console.log('default state: ', this.state)
     return (
       <Form className='ticket-form' onSubmit={this.handleSubmit}>
         <h3 style={{ color: 'yellowgreen' }}>Create a Ticket</h3>

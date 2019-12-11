@@ -17,7 +17,6 @@ class SiderRight extends Component {
   };
 
   render() {
-    console.log('main render props ', this.props)
     return (
       <Sider width={350} reverseArrow
           breakpoint="lg"

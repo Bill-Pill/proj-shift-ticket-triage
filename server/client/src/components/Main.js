@@ -81,7 +81,6 @@ class Main extends Component {
   }
 
   render() {
-    console.log('main render props ', this.props)
     return (
 
       <Layout>

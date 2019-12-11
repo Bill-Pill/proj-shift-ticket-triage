@@ -28,6 +28,12 @@ class TicketDetails extends Component {
     this.isDemoUser()
   }
 
+  componentDidUpdate() {
+    if (this.props.ticketDetails && this.props.ticketDetails[0]) {
+      alert('Emit demo start socket')
+    }
+  }
+
   isDemoUser = () => {
     if (this.props.auth.username && this.props.auth.isDemo) {
       console.log("Confirmed as demo user!")
