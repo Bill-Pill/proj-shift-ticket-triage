@@ -4,7 +4,6 @@ import Main from './components/Main'
 import TicketList from './components/TicketList'
 import TicketDetails from './components/TicketDetails'
 import HeaderNav from './components/HeaderNav'
-import SocketChatDrawer from './components/SocketChatDrawer'
 import { Layout } from 'antd';
 
 
@@ -18,7 +17,6 @@ class App extends Component {
             <Route exact path="/" component={Main} />
             <Route exact path="/tickets" component={TicketList} />
             <Route exact path="/ticket/:ticketid" component={TicketDetails} />
-            <Route exact path="/testingsockets" component={SocketChatDrawer} />
           </Switch>
         </Layout>
       </div>

@@ -5,9 +5,6 @@ import { Row, Col, Layout, Breadcrumb, Button, Input } from 'antd'
 import StatusTimeline from './StatusTimeline'
 import TicketProgress from './TicketProgress'
 import SiderRight from './SiderRight'
-import SocketChatDrawer from './SocketChatDrawer'
-import io from 'socket.io-client'
-const socket = io()
 
 const { Header, Content, Footer } = Layout;
 
@@ -28,11 +25,6 @@ class TicketDetails extends Component {
     this.isDemoUser()
   }
 
-  componentDidUpdate() {
-    if (this.props.ticketDetails && this.props.ticketDetails[0]) {
-      alert('Emit demo start socket')
-    }
-  }
 
   isDemoUser = () => {
     if (this.props.auth.username && this.props.auth.isDemo) {
@@ -44,17 +36,6 @@ class TicketDetails extends Component {
     this.setState({message: value})
   }
 
-  onResponseClick = () => {
-    if (this.props.ticketDetails[0]) {
-      const ticketid = this.props.ticketDetails[0].ticketid
-      console.log('os sent ', this.state.message)
-      socket.emit('user response', ticketid, this.state.message)
-    }
-      
-      // may not need later - allow front end to see their new messages from database
-      // this.props.fetchChats()
-    }
-  
 
   renderTicketDetails() {
     if (this.props.ticketDetails[0]) {
@@ -71,11 +52,7 @@ class TicketDetails extends Component {
     }
   }
 
-  sendPrompt = () => {
-    if (this.props.ticketDetails[0]) {
-      socket.emit('demo prompt', this.props.ticketDetails[0].ticketid)
-    }
-  }
+  
 
   render() {
     return (
@@ -83,13 +60,6 @@ class TicketDetails extends Component {
         <Layout style={{ padding: '0 24px 24px' }}>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
-            
-          <input
-            onChange={this.onChange}
-            className="inputMessage" 
-            placeholder="I.E. Windows 7, MacOS10, etc"
-            />
-            <Button onClick={this.onResponseClick}>Respond to ticket</Button>
               { this.props.ticketDetails[0] ? (
               <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>Ticket # {this.props.ticketDetails[0].ticketid}</Breadcrumb.Item>
@@ -100,8 +70,7 @@ class TicketDetails extends Component {
               {this.renderTicketDetails()}
               <div className="container-status">
                 <Row type="flex" align="middle" className="row-status">
-                  <Col span={4}>
-                    <Button onClick={this.sendPrompt}>prompt user</Button>
+                  <Col span={4}>                    
                     <h3>Status Feed</h3>
                     <StatusTimeline />
                   </Col>
@@ -110,7 +79,6 @@ class TicketDetails extends Component {
                   </Col>
                 </Row>
               </div>
-              <SocketChatDrawer />
             </div>
           </Content>
           

@@ -3,10 +3,32 @@ import { connect } from "react-redux";
 import Media from 'react-media'
 import { Steps, Button } from 'antd'
 import { updateTicketStatus } from '../actions'
+import io from 'socket.io-client'
+const socket = io()
 
 const { Step } = Steps;
 
 class TicketProgress extends Component {
+
+  componentDidMount () {
+    socket.on('increment step', ticketid => {
+      console.log('incrementing step on client')
+    })
+  }
+
+  componentDidUpdate() {
+    if (this.props.ticketDetails && this.props.ticketDetails[0]) {
+      socket.emit('start demo', this.props.ticketDetails[0].ticketid)
+    }
+  }
+
+  onResponseClick = () => {
+    if (this.props.ticketDetails[0]) {
+      const ticketid = this.props.ticketDetails[0].ticketid
+      console.log('os sent ', this.state.message)
+      socket.emit('user response', ticketid, this.state.message)
+    }
+  }
 
   currentStep = () => {
     if (!this.props.ticketDetails[0]) {
@@ -62,6 +84,12 @@ class TicketProgress extends Component {
     console.log('progress bar render props ', this.props)
     return (
       <div>
+        <input
+            onChange={this.onChange}
+            className="inputMessage" 
+            placeholder="I.E. Windows 7, MacOS10, etc"
+            />
+            <Button onClick={this.onResponseClick}>Respond to ticket</Button>
         <Button onClick={this.incrementTimedStep}>Increment TIMED Step Test Button</Button>
         <Media query={{ maxWidth: 1199 }}>
           {matches =>
