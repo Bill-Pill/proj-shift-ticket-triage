@@ -5,11 +5,9 @@ import { Row, Col, Layout, Breadcrumb, Input } from 'antd'
 import StatusTimeline from './StatusTimeline'
 import TicketProgress from './TicketProgress'
 import SiderRight from './SiderRight'
-import io from 'socket.io-client'
 
 const { Header, Content, Footer } = Layout;
 
-const socketUrl = 'http://10.174.69.249:5000'
 
 class TicketDetails extends Component {
 
@@ -58,7 +56,6 @@ class TicketDetails extends Component {
   }
 
   render() {
-    const { nickname, error } = this.state
     return (
       <Layout>
         <Layout style={{ padding: '0 24px 24px' }}>
