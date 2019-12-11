@@ -24,16 +24,17 @@ class HeaderNav extends Component {
         <div className="logo" style={logoStyle}>WIP
           <Icon type="plus-square" theme="filled" 
             style={{display:'inline', fontSize: '30px'}}/>TRIAGE</div>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          style={{ lineHeight: '64px', float: 'right', marginRight: '250px' }}
-        >
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
-        </Menu>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            breakpoint={'xs'}
+            defaultSelectedKeys={['2']}
+            style={{ lineHeight: '64px', float: 'right', marginRight: '250px' }}
+          >
+            <Menu.Item key="1">nav 1</Menu.Item>
+            <Menu.Item key="2">nav 2</Menu.Item>
+            <Menu.Item key="3">nav 3</Menu.Item>
+          </Menu>
     </Header>
     )
   }
