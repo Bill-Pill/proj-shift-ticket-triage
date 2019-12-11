@@ -20,6 +20,8 @@ class SiderRight extends Component {
     console.log('main render props ', this.props)
     return (
       <Sider width={350} reverseArrow
+          breakpoint="lg"
+          collapsedWidth="0"
           collapsible collapsed={this.state.collapsed} 
           onCollapse={this.onCollapse}>
           <div>
