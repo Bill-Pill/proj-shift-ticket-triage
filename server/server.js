@@ -35,7 +35,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(morgan('combined')) // use 'tiny' or 'combined'
 
-// App Routes - Auth
+// App Routes - chats
+app.get('/api/chats', (req, res) => chats.getChatData(req, res, db))
+
+// App Routes - tickets
 app.get('/api/tickets', (req, res) => tickets.getTicketData(req, res, db))
 
 app.get('/api/ticket/:ticketid', (req, res) => {
@@ -47,7 +50,6 @@ app.post('/api/ticket', (req, res) => {
   tickets.postTicketData(req, res, db)
   }
 )
-
 
 
 app.put('/api/ticket/:ticketid', (req, res) => {
