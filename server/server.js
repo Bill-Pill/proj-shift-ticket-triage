@@ -81,6 +81,7 @@ if (process.env.NODE_ENV === 'production') {
 const server = http.createServer(app)
 const io = module.exports.io = require('socket.io').listen(server)
 io.on('connection', (socket) => {
+  console.log('socket connection established')
   var addedUser = false;
 
   // when the client emits 'new message', this listens and executes
@@ -128,6 +129,7 @@ io.on('connection', (socket) => {
 
   // when the user disconnects.. perform this
   socket.on('disconnect', () => {
+    console.log('socket disconnection')
     if (addedUser) {
       --numUsers;
 
