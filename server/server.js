@@ -22,6 +22,7 @@ var db = require('knex')({
 
 // Controllers - aka, the db queries
 const tickets = require('./controllers/tickets')
+const chats = require('./controllers/chats')
 
 // App
 const app = express()
@@ -86,12 +87,17 @@ io.on('connection', (socket) => {
 
   // when the client emits 'new message', this listens and executes
   socket.on('new message', (data) => {
-    // we tell the client to execute 'new message'
+    // we tell the client to execute 'new message' currently forcing demo user
     socket.broadcast.emit('new message', {
-      username: socket.username,
       message: data
     });
-
+    // some hardcoded for testing
+    const postRecord = {
+      author: 'Demo User',
+      ticketid: 25,
+      message: data
+    }
+    chats.postDemoChatMessage(postRecord, db)
     console.log('new message: ', data)
   });
 
