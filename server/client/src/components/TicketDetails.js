@@ -12,20 +12,13 @@ const { Header, Content, Footer } = Layout;
 const socketUrl = 'http://10.174.69.249:5000'
 
 class TicketDetails extends Component {
-  state = {
-    collapsed: false,
-    socket: null,
-    user: null,
-    nickname:'',
-    error:''
-  };
+
 
   componentDidMount() {
     const ticketid = this.props.match.params.ticketid
     this.props.fetchTicketDetails(ticketid)
 
     this.isDemoUser()
-    this.initSocket()
   }
 
   isDemoUser = () => {
@@ -34,38 +27,6 @@ class TicketDetails extends Component {
     }
   }
 
-  initSocket = () => {
-    const socket = io(socketUrl)
-    socket.on('connect', () => {
-      console.log('Sockets online')
-    })
-    this.setState({socket})
-  }
-
-  setUser = (user) => {
-    const { socket } = this.state
-    socket.emit("USER_CONNECTED", user)
-    this.setState({user})
-  }
-
-  setFormUser = ({user, isUser}) => {
-    console.log(user, isUser)
-    if(isUser) {
-      this.setState(this.state.error, 'name is taken')
-    } else {
-      this.setUser(user)
-    }
-  }
-
-  logout = () => {
-    const { socket } = this.state
-    socket.emit('LOGOUT')
-    this.setState({user:null})
-  }
-
-  onCollapse = collapsed => {
-    this.setState({ collapsed });
-  };
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -119,21 +80,6 @@ class TicketDetails extends Component {
                     <TicketProgress />
                   </Col>
                 </Row>
-                <div className="testing-login">
-                  <form onSubmit={this.handleSubmit}>
-                    <label>
-                      <h2>Whats nickname</h2>
-                    </label>
-                    <input ref={(input) => {this.textInput = input}}
-                      type="text"
-                      id="nickname"
-                      value={nickname}
-                      onChange={this.handleChange}
-                      placeholder={'neat username'}
-                      />
-                      <div className="error">{error ? error:null}</div>
-                  </form>
-                </div>
               </div>
             </div>
           </Content>
