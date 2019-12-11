@@ -85,14 +85,9 @@ const server = http.createServer(app)
 const io = module.exports.io = require('socket.io').listen(server)
 io.on('connection', (socket) => {
   console.log('socket connection established')
-  var addedUser = false;
 
   // when the client emits 'new message', this listens and executes
   socket.on('new message', (data) => {
-    // we tell the client to execute 'new message' currently forcing demo user
-    socket.broadcast.emit('new message', {
-      message: data
-    });
     
     // some hardcoded for testing
     const postRecord = {
@@ -100,6 +95,10 @@ io.on('connection', (socket) => {
       ticketid: 25,
       message: data
     }
+
+    // we tell the client to execute 'new message' currently forcing demo user
+    socket.broadcast.emit('message received', postRecord);
+
     chats.postDemoChatMessage(postRecord, db)
     console.log('new message: ', data)
   });

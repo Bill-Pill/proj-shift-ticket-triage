@@ -10,12 +10,20 @@ class SocketChatDrawer extends Component {
     super(props);
 
     this.state = {
-      message: ''
+      message: '',
+      socketMessages: []
     };
   }
 
   componentDidMount () {
     this.props.fetchChats()
+
+    socket.on('message received', data => {
+      let newSocketMessages = this.state.socketMessages;
+
+      newSocketMessages.push(data)
+      this.setState({socketMessages: newSocketMessages})
+    })
   }
 
   onChange = (e) => {
@@ -26,23 +34,15 @@ class SocketChatDrawer extends Component {
   keyPressed = (e) => {
     if (e.key === 'Enter') {
       this.sendMessage()
-
+      e.target.value = ''
       // may not need later - allow front end to see their new messages from database
-      this.props.fetchChats()
+      // this.props.fetchChats()
     }
   }
 
     sendMessage = () => {
       const message = this.state.message
-      // if there is a non-empty message and a socket connection
       if (message) {
-
-        // shows visible message
-        // addChatMessage({
-        //   username: 'socketTester',
-        //   message: message
-        // });
-
         // tell server to execute 'new message' and send along one parameter
         socket.emit('new message', message);
       }
@@ -50,6 +50,7 @@ class SocketChatDrawer extends Component {
 
   render() {
     console.log('chat drawer render props: ', this.props)
+    console.log('state drawer: ', this.state)
     const chats = this.props.chats
     return (
       <div>
@@ -62,6 +63,17 @@ class SocketChatDrawer extends Component {
         >
           <div className="chat-box">
             {chats.map((m, i) => {
+              return (
+                <div className="col-12" key={i}>
+                  <div className="row">
+                    <div className="col-2">{m.author}</div>
+                    <div className="col">{m.message}</div>
+                    <div className="col-3">{m.time}</div>
+                  </div>
+                </div>
+              );
+            })}
+            {this.state.socketMessages.map((m, i) => {
               return (
                 <div className="col-12" key={i}>
                   <div className="row">
