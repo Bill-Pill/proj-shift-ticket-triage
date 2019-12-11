@@ -92,7 +92,8 @@ io.on('connection', (socket) => {
 
   //User response with OS
   socket.on('user response', (ticketid, response) => {
-    console.log('ticket:', ticketid, ' OS: ', response)
+    console.log('Sending response to SQL land. ticket:', ticketid, ' OS: ', response)
+    tickets.putDemoResponse(ticketid, response, db)
   })
 
   // create room according to ticketid

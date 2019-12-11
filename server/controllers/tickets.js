@@ -70,11 +70,18 @@ const getDemoTicketData = (req, res, db, username) => {
     .catch(err => res.status(400).json({dbError: 'db error'}))
 }
 
+const putDemoResponse = (ticketid, response, db) => {
+  db('tickets').where({'ticketid': ticketid})
+    .update({'demoresponse': response})
+    .catch(err => console.log('error in demo response ', err))
+}
+
 module.exports = {
   getTicketData,
   getTicketDetails,
   postTicketData,
   putTicketStatus,
   deleteTicketData,
-  getDemoTicketData
+  getDemoTicketData,
+  putDemoResponse
 }
