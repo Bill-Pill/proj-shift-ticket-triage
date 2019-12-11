@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { fetchChats } from '../actions'
 import { Drawer, Button, Radio } from 'antd';
 import io from 'socket.io-client'
 const socket = io()
@@ -13,10 +14,13 @@ class SocketChatDrawer extends Component {
     };
   }
 
+  componentDidMount () {
+    this.props.fetchChats()
+  }
+
   onChange = (e) => {
     let value = e.target.value
     this.setState({message: value})
-    console.log(value)
   }
 
   keyPressed = (e) => {
@@ -42,6 +46,7 @@ class SocketChatDrawer extends Component {
    }
 
   render() {
+    console.log('chat drawer render props: ', this.props)
     return (
       <div>
         <Drawer
@@ -69,8 +74,9 @@ class SocketChatDrawer extends Component {
 
 const mapStateToProps = state => {
   return {
-   auth: state.auth
+   auth: state.auth,
+   chats: state.chats
   };
 };
 
-export default connect(mapStateToProps)(SocketChatDrawer);
+export default connect(mapStateToProps, { fetchChats })(SocketChatDrawer);

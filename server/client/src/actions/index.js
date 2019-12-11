@@ -6,8 +6,21 @@ export const FETCH_TICKET_DETAILS= "fetch_ticket_details";
 export const LOGIN = 'login'
 export const LOGOUT = 'logout'
 export const SUBMIT_TICKET = 'submit_ticket'
+export const FETCH_CHATS = 'fetch_chats'
 
 const ROOT_URL = "/api";
+
+export const fetchChats = () => {
+  const request = axios
+    .get(`${ROOT_URL}/chats`)
+    .catch(function(error) {
+      console.log("error: ", error);
+    });
+  return {
+    type: FETCH_CHATS,
+    payload: request
+  };
+}
 
 export const fetchTickets = () => {
   const request = axios
