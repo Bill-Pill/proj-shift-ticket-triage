@@ -19,6 +19,7 @@ const logoStyle = {
 class HeaderNav extends Component {
 
   render() {
+    console.log('header nav props: ', this.props)
     return (
       <Header>
         <div className="logo" style={logoStyle}>WIP
@@ -28,12 +29,12 @@ class HeaderNav extends Component {
             theme="dark"
             mode="horizontal"
             breakpoint={'xs'}
-            defaultSelectedKeys={['2']}
+            defaultSelectedKeys={['1']}
             style={{ lineHeight: '64px', float: 'right', marginRight: '250px' }}
           >
             <Menu.Item key="1">nav 1</Menu.Item>
-            <Menu.Item key="2">nav 2</Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
+            <Menu.Item key="2">Nav 2</Menu.Item>
+
           </Menu>
     </Header>
     )
