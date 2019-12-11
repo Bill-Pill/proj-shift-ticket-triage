@@ -1,13 +1,12 @@
 const postDemoChatMessage = (postRecord, db) => {
   const { author, ticketid, message } = postRecord
   const sentTime = new Date()
-  console.log(postRecord, db)
-  db('chats').insert({author, sentTime, ticketid, message});
+  db('chats').insert({author, time:sentTime, ticketid, message})
     // .returning('*')
-    // .then(item => {
+    // .then(console.log)
     //   res.json(item)
     // })
-    // .catch(err => res.status(400).json({dbError: 'error in chat db: ', err}))
+    .catch(err => console.log('eror in chat chatdb: ', err))
 }
 
 module.exports = {
