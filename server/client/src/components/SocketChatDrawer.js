@@ -26,6 +26,9 @@ class SocketChatDrawer extends Component {
   keyPressed = (e) => {
     if (e.key === 'Enter') {
       this.sendMessage()
+
+      // may not need later - allow front end to see their new messages from database
+      this.props.fetchChats()
     }
   }
 

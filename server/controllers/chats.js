@@ -1,5 +1,6 @@
 const getChatData = (req, res, db) => {
   db.select('*').from('chats')
+    .returning('*')
     .then(items => {
       if(items.length){
         res.json(items)
@@ -14,10 +15,6 @@ const postDemoChatMessage = (postRecord, db) => {
   const { author, ticketid, message } = postRecord
   const sentTime = new Date()
   db('chats').insert({author, time:sentTime, ticketid, message})
-    // .returning('*')
-    // .then(console.log)
-    //   res.json(item)
-    // })
     .catch(err => console.log('eror in chat chatdb: ', err))
 }
 
