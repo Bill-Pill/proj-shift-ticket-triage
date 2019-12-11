@@ -47,6 +47,7 @@ class SocketChatDrawer extends Component {
 
   render() {
     console.log('chat drawer render props: ', this.props)
+    const chats = this.props.chats
     return (
       <div>
         <Drawer
@@ -56,16 +57,22 @@ class SocketChatDrawer extends Component {
           onClose={this.onClose}
           visible
         >
-          <ul className="pages">
-          <li className="chat page">
-            <div className="chatArea">
-              <ul className="messages"></ul>
-            </div>
+          <div className="chat-box">
+            {chats.map((m, i) => {
+              return (
+                <div className="col-12" key={i}>
+                  <div className="row">
+                    <div className="col-2">{m.author}</div>
+                    <div className="col">{m.message}</div>
+                    <div className="col-3">{m.time}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
             <input onKeyPress={this.keyPressed} 
             onChange={this.onChange}
             className="inputMessage" placeholder="Type here..."/>
-          </li>
-        </ul>
         </Drawer>
       </div>
     );
