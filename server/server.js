@@ -90,6 +90,11 @@ io.on('connection', (socket) => {
     console.log('demo prompt for ticket: ', ticketid)
   })
 
+  //User response with OS
+  socket.on('user response', (ticketid, response) => {
+    console.log('ticket:', ticketid, ' OS: ', response)
+  })
+
   // create room according to ticketid
   socket.on('create', room => {
     socket.join(room)

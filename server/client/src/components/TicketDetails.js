@@ -13,7 +13,13 @@ const { Header, Content, Footer } = Layout;
 
 
 class TicketDetails extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      message: ''
+    };
+  }
 
   componentDidMount() {
     const ticketid = this.props.match.params.ticketid
@@ -27,6 +33,21 @@ class TicketDetails extends Component {
       console.log("Confirmed as demo user!")
     }
   }
+  onChange = (e) => {
+    let value = e.target.value
+    this.setState({message: value})
+  }
+
+  onResponseClick = () => {
+    if (this.props.ticketDetails[0]) {
+      const ticketid = this.props.ticketDetails[0].ticketid
+      console.log('os sent ', this.state.message)
+      socket.emit('user response', ticketid, this.state.message)
+    }
+      
+      // may not need later - allow front end to see their new messages from database
+      // this.props.fetchChats()
+    }
   
 
   renderTicketDetails() {
@@ -57,7 +78,12 @@ class TicketDetails extends Component {
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
             
-              
+          <input
+            onChange={this.onChange}
+            className="inputMessage" 
+            placeholder="I.E. Windows 7, MacOS10, etc"
+            />
+            <Button onClick={this.onResponseClick}>Respond to ticket</Button>
               { this.props.ticketDetails[0] ? (
               <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>Ticket # {this.props.ticketDetails[0].ticketid}</Breadcrumb.Item>
