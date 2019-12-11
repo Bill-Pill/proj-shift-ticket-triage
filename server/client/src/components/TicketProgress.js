@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import Media from 'react-media'
 import { Steps, Button } from 'antd'
 import { updateTicketStatus } from '../actions'
 
@@ -61,9 +62,11 @@ class TicketProgress extends Component {
     console.log('progress bar render props ', this.props)
     return (
       <div>
-        {/* <Button onClick={this.incrementStep}>Increment Step Test Button</Button> */}
         <Button onClick={this.incrementTimedStep}>Increment TIMED Step Test Button</Button>
-        <Steps current={this.currentStep()} status="process">
+        <Media query={{ maxWidth: 1199 }}>
+          {matches =>
+            matches ? (
+        <Steps direction="vertical" current={this.currentStep()} status="process">
           <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
           <Step title="Resolving Issue" description="(USERNAME) is now hard at 
             work resolving the issue. --------------------
@@ -72,6 +75,31 @@ class TicketProgress extends Component {
           <Step title="Response Requested" description="(USERNAME) has requested a response" />
           <Step title="Issue Resolved" description="Huzzah! Ticket is now resolved and closed" />
         </Steps>
+                  
+            ) : (
+              <Steps current={this.currentStep()} status="process">
+                <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
+                <Step title="Resolving Issue" description="(USERNAME) is now hard at 
+                  work resolving the issue. --------------------
+                  ----------------- **COLORCHANGE** (USERNAME) is
+                  typing up a response"/>
+                <Step title="Response Requested" description="(USERNAME) has requested a response" />
+                <Step title="Issue Resolved" description="Huzzah! Ticket is now resolved and closed" />
+              </Steps>
+            )
+          }
+        </Media>
+        {/* <Button onClick={this.incrementStep}>Increment Step Test Button</Button>
+        <Button onClick={this.incrementTimedStep}>Increment TIMED Step Test Button</Button>
+        <Steps direction="vertical" current={this.currentStep()} status="process">
+          <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
+          <Step title="Resolving Issue" description="(USERNAME) is now hard at 
+            work resolving the issue. --------------------
+            ----------------- **COLORCHANGE** (USERNAME) is
+            typing up a response"/>
+          <Step title="Response Requested" description="(USERNAME) has requested a response" />
+          <Step title="Issue Resolved" description="Huzzah! Ticket is now resolved and closed" />
+        </Steps> */}
       </div>
     );
   }
