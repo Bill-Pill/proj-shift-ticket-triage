@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { fetchTicketDetails } from "../actions"
-import { Row, Col, Layout, Breadcrumb, Input } from 'antd'
+import { Row, Col, Layout, Breadcrumb, Button, Input } from 'antd'
 import StatusTimeline from './StatusTimeline'
 import TicketProgress from './TicketProgress'
 import SiderRight from './SiderRight'
 import SocketChatDrawer from './SocketChatDrawer'
+import io from 'socket.io-client'
+const socket = io()
 
 const { Header, Content, Footer } = Layout;
 
@@ -25,19 +27,6 @@ class TicketDetails extends Component {
       console.log("Confirmed as demo user!")
     }
   }
-
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-
-    const{ socket } = this.state
-    const { nickname } = this.state
-    socket.emit('VERIFY_USER', nickname, this.setFormUser)
-  }
-
-  handleChange = (e) => {
-    this.setState({nickname:e.target.value})
-  }
   
 
   renderTicketDetails() {
@@ -53,7 +42,12 @@ class TicketDetails extends Component {
         </div>
       )
     }
-    
+  }
+
+  sendPrompt = () => {
+    if (this.props.ticketDetails[0]) {
+      socket.emit('demo prompt', this.props.ticketDetails[0].ticketid)
+    }
   }
 
   render() {
@@ -62,15 +56,20 @@ class TicketDetails extends Component {
         <Layout style={{ padding: '0 24px 24px' }}>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
+            
+              
+              { this.props.ticketDetails[0] ? (
+              <Breadcrumb style={{ margin: '16px 0' }}>
+                <Breadcrumb.Item>Ticket # {this.props.ticketDetails[0].ticketid}</Breadcrumb.Item>
+                <Breadcrumb.Item>Details</Breadcrumb.Item>
+              </Breadcrumb>
+               ) : null }
             <div style={{ padding: 24, background: '#fff', minHeight: '100vh' }}>
               {this.renderTicketDetails()}
               <div className="container-status">
                 <Row type="flex" align="middle" className="row-status">
                   <Col span={4}>
+                    <Button onClick={this.sendPrompt}>prompt user</Button>
                     <h3>Status Feed</h3>
                     <StatusTimeline />
                   </Col>

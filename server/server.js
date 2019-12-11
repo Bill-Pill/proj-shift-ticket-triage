@@ -1,6 +1,5 @@
 const http = require('http')
 const express = require('express')
-const SocketManager = require('./socketManager')
 
 // use process.env variables to keep private variables,
 require('dotenv').config()
@@ -85,6 +84,11 @@ const server = http.createServer(app)
 const io = module.exports.io = require('socket.io').listen(server)
 io.on('connection', (socket) => {
   console.log('socket connection established')
+
+  //triggers user prompt logic for specific ticket
+  socket.on('demo prompt', ticketid => {
+    console.log('demo prompt for ticket: ', ticketid)
+  })
 
   // create room according to ticketid
   socket.on('create', room => {
