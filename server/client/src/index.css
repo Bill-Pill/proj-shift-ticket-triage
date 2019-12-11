@@ -65,9 +65,12 @@ code {
   float: left;
 }
 
-.chat-box {
+
+.chat-messages {
   height: 200px;
   width: 18%;
   overflow: hidden;
   overflow-y: scroll;
+  float: right;
+  background-color: lightslategray
 }

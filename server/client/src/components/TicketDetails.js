@@ -66,7 +66,7 @@ class TicketDetails extends Component {
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+            <div style={{ padding: 24, background: '#fff', minHeight: '100vh' }}>
               {this.renderTicketDetails()}
               <div className="container-status">
                 <Row type="flex" align="middle" className="row-status">
@@ -79,9 +79,9 @@ class TicketDetails extends Component {
                   </Col>
                 </Row>
               </div>
+              <SocketChatDrawer />
             </div>
           </Content>
-            {/* <SocketChatDrawer /> */}
           
           <Footer style={{ textAlign: 'center' }}>Ticket Triage!</Footer>
         </Layout>

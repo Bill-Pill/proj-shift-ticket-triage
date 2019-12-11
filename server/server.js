@@ -86,6 +86,12 @@ const io = module.exports.io = require('socket.io').listen(server)
 io.on('connection', (socket) => {
   console.log('socket connection established')
 
+  // create room according to ticketid
+  socket.on('create', room => {
+    socket.join(room)
+    console.log('joined room for ticket: ', room)
+  })
+
   // when the client emits 'new message', this listens and executes
   socket.on('new message', (data) => {
     

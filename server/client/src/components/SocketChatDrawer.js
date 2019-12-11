@@ -16,16 +16,32 @@ class SocketChatDrawer extends Component {
 
   componentDidMount () {
     this.props.fetchChats()
-
+    this.createSocketRoom()
+    
     socket.on('message received', data => {
       let newSocketMessages = this.state.socketMessages;
 
       newSocketMessages.push(data)
       this.setState({socketMessages: newSocketMessages})
     })
+
   }
 
-  onChange = (e) => {
+  createSocketRoom = () => {
+    if(this.props.ticketDetails[0])  {
+      socket.emit('create', this.props.ticketDetails[0].ticketid)
+    }
+  }
+
+  sendMessage = () => {
+    const message = this.state.message
+    if (message) {
+      // tell server to execute 'new message' and send along one parameter
+      socket.emit('new message', message);
+    }
+  }
+
+   onChange = (e) => {
     let value = e.target.value
     this.setState({message: value})
   }
@@ -39,17 +55,7 @@ class SocketChatDrawer extends Component {
     }
   }
 
-    sendMessage = () => {
-      const message = this.state.message
-      if (message) {
-        // tell server to execute 'new message' and send along one parameter
-        socket.emit('new message', message);
-      }
-   }
-
   render() {
-    console.log('chat drawer render props: ', this.props)
-    console.log('state drawer: ', this.state)
     const chats = this.props.chats
     return (
       <div className="chat-box">
@@ -76,10 +82,12 @@ class SocketChatDrawer extends Component {
                 </div>
               );
             })}
-          </div>
             <input onKeyPress={this.keyPressed} 
             onChange={this.onChange}
-            className="inputMessage" placeholder="Type here..."/>
+            className="inputMessage" placeholder="Type here..."
+            style={{width: '100%'}}/>
+          </div>
+            
       </div>
     );
   }
@@ -87,6 +95,7 @@ class SocketChatDrawer extends Component {
 
 const mapStateToProps = state => {
   return {
+   ticketDetails: state.details,
    auth: state.auth,
    chats: state.chats
   };
