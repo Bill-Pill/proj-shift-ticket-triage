@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import Media from 'react-media'
-import { Steps, Button } from 'antd'
+import { Steps, Button, Row, Col } from 'antd'
 import { updateTicketStatus } from '../actions'
 import io from 'socket.io-client'
 const socket = io()
@@ -13,7 +13,8 @@ class TicketProgress extends Component {
     super(props);
 
     this.state = {
-      stepStatus: 'process'
+      stepStatus: 'process',
+      inputVisible: false
     };
   }
 
@@ -81,7 +82,7 @@ class TicketProgress extends Component {
         // clear loop
         if (currentStep >= 2) {
           console.log('demo pausing')
-          this.state.stepStatus = 'error'
+          this.setState({stepStatus: 'error'})
           clearInterval(intervalId)
         }
       }, 2000)
@@ -93,13 +94,15 @@ class TicketProgress extends Component {
     console.log('progress bar render props ', this.props)
     return (
       <div>
-        <input
+        <div>
+          <input
             onChange={this.onChange}
             className="inputMessage" 
             placeholder="I.E. Windows 7, MacOS10, etc"
+            style={{marginBottom: '100px'}}
             />
-            <Button onClick={this.onResponseClick}>Respond to ticket</Button>
-        <Button onClick={this.incrementTimedStep}>Increment TIMED Step Test Button</Button>
+          <Button onClick={this.onResponseClick}>Respond to ticket</Button>
+        </div>
         <Media query={{ maxWidth: 1199 }}>
           {matches =>
             matches ? (
