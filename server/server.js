@@ -95,14 +95,15 @@ io.on('connection', (socket) => {
   //triggers user prompt logic for specific ticket
   socket.on('start demo', ticketid => {
     console.log('start demo triggered on server')
-    socket.emit('demo increment', ticketid)
+    socket.emit('demo start increment', ticketid)
   })
 
 
-  //User response with OS
+  //User response with OS. Saves to DB and emits socket to finish ticket
   socket.on('demo user response', (ticketid, response) => {
     console.log('Sending response to SQL land. ticket:', ticketid, ' OS: ', response)
     tickets.putDemoResponse(ticketid, response, db)
+    socket.emit('demo finish increment', ticketid)
   })
 
 

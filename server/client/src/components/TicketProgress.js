@@ -21,15 +21,26 @@ class TicketProgress extends Component {
   }
 
   componentDidMount () {
-    socket.on('demo increment', ticketid => {
+
+    // Sets demo response to state if complete ticket found
+    if (this.props.ticketDetails[0] && this.props.ticketDetails[0].demoresponse) {
+        this.setState({demoUserResponse: this.props.ticketDetails[0].demoresponse})
+      }
+
+    socket.on('demo start increment', ticketid => {
       if (ticketid === this.props.ticketDetails[0].ticketid && 
         this.props.ticketDetails[0].statuscode === 0) {
             console.log('incrementing demo step on client')
-            this.incrementTimedDemoStepToResponse()
+            this.incrementTimedDemoStepToResponse(2)
       }
-      // Sets demo response to state if complete ticket found
-      if (this.props.ticketDetails[0] && this.props.ticketDetails[0].demoresponse) {
-        this.setState({demoUserResponse: this.props.ticketDetails[0].demoresponse})
+    })
+
+    socket.on('demo finish increment', ticketid => {
+      if (ticketid === this.props.ticketDetails[0].ticketid && 
+        this.props.ticketDetails[0].statuscode === 2) {
+          console.log('finishing demo steps on client')
+          
+          this.incrementTimedDemoStepToResponse(4)
       }
     })
   }
@@ -79,7 +90,12 @@ class TicketProgress extends Component {
   }
 
   // Logic triggering on demo start
-  incrementTimedDemoStepToResponse = () => {
+  incrementTimedDemoStepToResponse = (stopStep) => {
+    // Hacky conditional to change status state on end of demo process
+    if (stopStep === 4 ) {
+      this.setState({stepStatus: 'process'})
+    }
+
     let currentStep = this.currentStep()
 
     if(this.props.ticketDetails[0]) {
@@ -91,20 +107,28 @@ class TicketProgress extends Component {
         this.props.updateTicketStatus(ticketid, newStep)
         currentStep += 1
         // clear loop
-        if (currentStep >= 2) {
-          console.log('demo pausing')
+        if (currentStep >= stopStep) {
+          console.log('demo pausing with stop step: ', stopStep)
           this.setState({stepStatus: 'error'})
-          this.toggleResponseForm()
+          if (!this.state.responseVisible && stopStep != 4) {
+            this.toggleResponseForm()
+          }
           clearInterval(intervalId)
         }
       }, 2500)
     }
-
   }
 
   onChange = (e) => {
     let value = e.target.value
     this.setState({message: value})
+  }
+
+  renderDemoResponse() {
+    if(this.props.ticketDetails[0] && this.props.ticketDetails[0].statuscode === 4) {
+      console.log('demo response :', this.props.ticketDetails[0].demoresponse)
+      return this.props.ticketDetails[0].demoresponse
+    }
   }
 
   render() {
@@ -143,7 +167,7 @@ class TicketProgress extends Component {
             ----------------- **COLORCHANGE** (USERNAME) is
             typing up a response"/>
           <Step title="Response Requested" description="(USERNAME) has requested a response" />
-          <Step title="Issue Resolved" description={this.state.demoUserResponse} />
+          <Step title="Issue Resolved" description={this.renderDemoResponse()} />
         </Steps>
                   
             ) : (
@@ -154,7 +178,7 @@ class TicketProgress extends Component {
                   ----------------- **COLORCHANGE** (USERNAME) is
                   typing up a response"/>
                 <Step title="Response Requested" description="(USERNAME) has requested a response" />
-                <Step title="Issue Resolved" description={this.state.demoUserResponse} />
+                <Step title="Issue Resolved" description={this.renderDemoResponse()} />
               </Steps>
             )
           }
