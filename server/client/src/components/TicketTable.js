@@ -82,6 +82,15 @@ class TicketTable extends Component {
         pagination={false} 
         scroll={{ y: 375}}
         locale={{emptyText: noTableDataMsg}}
+        rowClassName={ (record, index) => 
+          {  if (record.statuscode === 0) {
+            return 'status-red blinking'
+        } else if (record.statuscode=== 4) {
+          return 'status-blue'
+        } else {
+          return 'status-yellow'
+        }
+      }   }
         >
       </Table>
     )

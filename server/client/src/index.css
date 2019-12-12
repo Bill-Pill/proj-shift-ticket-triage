@@ -79,3 +79,25 @@ code {
   margin: 25px;
 
 }
+
+.status-red {
+  background-color: darkred, 1;
+}
+
+.status-yellow {
+  background-color: yellow;
+}
+
+.status-blue {
+  background-color: teal;
+}
+
+.blinking {
+  animation: blinker 3s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    background-color: darkred;
+  }
+}
