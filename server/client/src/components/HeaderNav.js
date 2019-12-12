@@ -98,7 +98,7 @@ class HeaderNav extends Component {
         >
           <p>Please create a ticket using the sidebar form.</p>
           <p>Once created, click the ticket on the list to watch the process realtime.</p>
-          <p>Be ready - you'll be asked by Mr. IT bot for a repsonse.</p>
+          <p>Be ready - you'll be asked by The IT bot for a response!</p>
           <p>That's it - enjoy the evening and please do stop by my booth. - Billy</p>
         </Modal>
     </Header>

@@ -38,10 +38,6 @@ class TicketDetails extends Component {
     if (this.props.ticketDetails[0]) {
       const ticketDetails = this.props.ticketDetails[0]
       return (
-        <Row type="flex" justify="space-around" align="middle">
-          <Col span={8}>
-          </Col>
-          <Col span={8}>
             <div className='details' style={{textAlign: "center"}}>
               <div><strong>Title:</strong> {ticketDetails.title}</div>
               <div><strong>Category:</strong> {ticketDetails.category}</div>
@@ -49,11 +45,6 @@ class TicketDetails extends Component {
               <div><strong>Department:</strong> {ticketDetails.department}</div>
               <div><strong>Details:</strong> {ticketDetails.ticketdetails}</div>
             </div>
-          </Col>
-          <Col span={8}>
-          </Col>
-        </Row>
-        
       )
     }
   }
@@ -73,14 +64,20 @@ class TicketDetails extends Component {
               </Breadcrumb>
                ) : null }
             <div style={{ padding: 24, background: '#fff', minHeight: '100vh' }}>
-              {this.renderTicketDetails()}
+              <Row type="flex" justify="space-around" align="middle">
+                <Col span={8}>
+                  <h3>Status Feed</h3>
+                <StatusTimeline />
+                </Col>
+                <Col span={8}>
+                  {this.renderTicketDetails()}
+                </Col>
+                <Col span={8}>
+                </Col>
+              </Row>
               <div className="container-status">
                 <Row type="flex" align="middle" className="row-status">
-                  <Col span={4}>                    
-                    <h3>Status Feed</h3>
-                    <StatusTimeline />
-                  </Col>
-                  <Col span={20}>
+                  <Col span={20} offset={2}>
                     <TicketProgress />
                   </Col>
                 </Row>
