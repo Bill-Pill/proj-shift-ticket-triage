@@ -87,13 +87,12 @@ export const logOutOfStore = (callback) => {
 }
 
 // Actions for demo use
-export const loginAsDemo = (callback) => {
+export const loginAsDemo = () => {
 
   let demoObj = { username:uuidv4(), isAdmin: false, isDemo: true}
 
   localStorage.setItem('username', demoObj.username)
   localStorage.setItem('isDemo', true)
-  callback()
   return {
     type: LOGIN,
     payload: demoObj

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Modal, Button } from 'antd';
 import Media from 'react-media'
-import { loginToStore, logOutOfStore } from "../actions"
+import { loginToStore, logOutOfStore, loginAsDemo } from "../actions"
 
 const { Header } = Layout;
 
@@ -19,6 +19,31 @@ const logoStyle = {
 }
 
 class HeaderNav extends Component {
+
+  state = {
+    collapsed: false,
+    visible: false
+  };
+
+  componentDidMount() {
+    if (!this.props.auth.username) {
+      this.showModal()
+    }
+  }
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleDemoLoginClick = () => {
+    this.props.loginAsDemo()
+    this.setState({
+      visible: false
+    })
+
+  }
 
   render() {
     return (
@@ -56,6 +81,26 @@ class HeaderNav extends Component {
             )
           }
         </Media>
+        <Modal
+          visible={this.state.visible}
+          title="Title"
+          footer={[
+            // <Button key="adminlogin" type="danger"
+            //   onClick={this.handleLogin}>
+            //   Login as Admin
+            // </Button>,
+            // <Button key="userlogin" type="primary" 
+            //   onClick={this.handleTest}>
+            //   Login as User
+            // </Button>,
+            <Button key="demologin" type="primary" 
+              onClick={this.handleDemoLoginClick}>
+              Demo!
+            </Button>
+          ]}
+        >
+          <p>Don't worry - you won't break anything.</p>
+        </Modal>
     </Header>
     )
   }
@@ -67,4 +112,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { loginToStore, logOutOfStore })(HeaderNav);
+export default connect(mapStateToProps, { loginToStore, logOutOfStore, loginAsDemo })(HeaderNav);
