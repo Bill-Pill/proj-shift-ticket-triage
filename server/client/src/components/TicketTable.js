@@ -86,7 +86,7 @@ class TicketTable extends Component {
           {  if (record.statuscode === 0) {
             return 'status-red blinking'
         } else if (record.statuscode=== 4) {
-          return 'status-blue'
+          return null
         } else {
           return 'status-yellow'
         }
