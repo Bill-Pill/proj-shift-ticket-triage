@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { fetchTickets, fetchDemoTickets } from "../actions"
 import { Table} from 'antd';
 
+const noTableDataMsg = 'No Tickets - Try submitting one with the right siderbar!'
 // Schema used for Ticket Table component w/ Ant Design
 const columns = [
   {
@@ -14,7 +15,24 @@ const columns = [
   {
     title: 'Status',
     dataIndex: 'statuscode',
-    key: 'statuscode'
+    render: code => {
+      switch (code) {
+        case 0:
+          return <span>New Ticket</span>
+        case 1:
+          return <span>Open</span>
+        case 2, 3:
+          return <span>In Progress</span>
+        case 4:
+          return <span>Resolved</span>
+      }
+      // if(code === 0) {
+      //   return <span>test 0 passed</span>
+      // } else {
+      //   return <span>else passed</span>
+      // }
+      
+    }
   },
   {
     title: 'Title',
@@ -61,7 +79,9 @@ class TicketTable extends Component {
     return (
       <Table dataSource={this.props.tickets || []} columns={columns}
         rowKey="ticketid"
-        pagination={false} scroll={{ y: 375}}
+        pagination={false} 
+        scroll={{ y: 375}}
+        locale={{emptyText: noTableDataMsg}}
         >
       </Table>
     )
