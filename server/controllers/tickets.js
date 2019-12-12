@@ -24,8 +24,9 @@ const getTicketDetails = (req, res, db, ticketid) => {
 
 const putTicketStatus = (req, res, db, ticketid) => {
   const newStatusCode = req.body.newStatusCode;
+  const modified = new Date()
   db('tickets').where({'ticketid': ticketid})
-    .update({'statuscode': newStatusCode})
+    .update({'statuscode': newStatusCode, 'modified': modified})
     .returning('*')
     .then(item => {
       res.json(item)
