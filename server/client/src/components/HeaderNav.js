@@ -10,10 +10,9 @@ const { Header } = Layout;
 const logoStyle = {
   fontFamily: 'Raleway',
   fontSize: '30px',
-  color: 'gray',
-  width: '120px',
-  height: '31px',
-  background: 'rgba(255, 255, 255, 0.2)',
+  color: '#df1f1f',
+  width: '300px',
+  height: '44px',
   margin: '16px 24px 16px 0',
   display: 'inline-block',
   float: 'left'
@@ -49,9 +48,11 @@ class HeaderNav extends Component {
   render() {
     return (
       <Header>
-        <div className="logo" style={logoStyle}>WIP
-          <Icon type="plus-square" theme="filled" 
-            style={{display:'inline', fontSize: '30px'}}/>TRIAGE</div>
+        <div className="logo" style={logoStyle}>
+          <span style={{color: 'white'}}>TICKET</span>
+          <Icon type="medicine-box" theme="twoTone"
+            twoToneColor="#df1f1f"
+            style={{display:'inline', fontSize: '30px', letterSpacing: '50px'}}/>TRIAGE</div>
 
         <Media query={{ maxWidth: 768 }}>
           {matches =>
