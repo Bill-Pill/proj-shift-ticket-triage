@@ -161,39 +161,23 @@ class TicketProgress extends Component {
           {matches =>
             matches ? (
         <Steps direction="vertical" current={this.currentStep()} status={this.state.stepStatus}>
-          <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
-          <Step title="Resolving Issue" description="(USERNAME) is now hard at 
-            work resolving the issue. --------------------
-            ----------------- **COLORCHANGE** (USERNAME) is
-            typing up a response"/>
-          <Step title="Response Requested" description="(USERNAME) has requested a response" />
+          <Step title="Ticket Sent" />
+          <Step title="Resolving Issue"/>
+          <Step title="Response Requested" />
           <Step title="Issue Resolved" description={this.renderDemoResponse()} />
         </Steps>
                   
             ) : (
               <Steps current={this.currentStep()} status={this.state.stepStatus}>
-                <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
-                <Step title="Resolving Issue" description="(USERNAME) is now hard at 
-                  work resolving the issue. --------------------
-                  ----------------- **COLORCHANGE** (USERNAME) is
-                  typing up a response"/>
-                <Step title="Response Requested" description="(USERNAME) has requested a response" />
-                <Step title="Issue Resolved" description={this.renderDemoResponse()} />
+                <Step title="Ticket Sent" />
+                <Step title="Resolving Issue" />
+                <Step title="Response Requested" />
+                <Step title="Issue Resolved" description={`Resolved on OS: ${this.renderDemoResponse()}`} />
               </Steps>
             )
           }
         </Media>
-        {/* <Button onClick={this.incrementStep}>Increment Step Test Button</Button>
-        <Button onClick={this.incrementTimedStep}>Increment TIMED Step Test Button</Button>
-        <Steps direction="vertical" current={this.currentStep()} status="process">
-          <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
-          <Step title="Resolving Issue" description="(USERNAME) is now hard at 
-            work resolving the issue. --------------------
-            ----------------- **COLORCHANGE** (USERNAME) is
-            typing up a response"/>
-          <Step title="Response Requested" description="(USERNAME) has requested a response" />
-          <Step title="Issue Resolved" description="Huzzah! Ticket is now resolved and closed" />
-        </Steps> */}
+
       </div>
     );
   }
