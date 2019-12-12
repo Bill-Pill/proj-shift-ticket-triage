@@ -12,12 +12,16 @@ class TicketProgress extends Component {
 
   componentDidMount () {
     socket.on('increment step', ticketid => {
-      console.log('incrementing step on client')
+      if (ticketid === this.props.ticketDetails[0].ticketid) {
+        console.log('incrementing step on client')
+      }
+      
       this.incrementStep()
     })
   }
 
   componentDidUpdate() {
+    // sent emit code for demo start after 5 seconds if ticket loaded and status code at 0
     if (this.props.ticketDetails && this.props.ticketDetails[0] && this.props.ticketDetails[0].statuscode===0) {
       // wait a few seconds before starting demo
       setTimeout(() => {
