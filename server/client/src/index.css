@@ -74,3 +74,8 @@ code {
   float: right;
   background-color: lightslategray
 }
+
+.details div {
+  margin: 25px;
+
+}

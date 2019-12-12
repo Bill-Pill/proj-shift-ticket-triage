@@ -38,13 +38,22 @@ class TicketDetails extends Component {
     if (this.props.ticketDetails[0]) {
       const ticketDetails = this.props.ticketDetails[0]
       return (
-        <div className='details'>
-          <div>HI HELP IM STUCK IN DETAILS</div>
-          <div>{ticketDetails.title}</div>
-          <div>{ticketDetails.category}</div>
-          <div>{ticketDetails.ticketdetails}</div>
-          <div>{ticketDetails.department}</div>
-        </div>
+        <Row type="flex" justify="space-around" align="middle">
+          <Col span={8}>
+          </Col>
+          <Col span={8}>
+            <div className='details' style={{textAlign: "center"}}>
+              <div>Title: {ticketDetails.title}</div>
+              <div>Category: {ticketDetails.category}</div>
+              <div>User: Demo User</div>
+              <div>Department: {ticketDetails.department}</div>
+              <div>Details: {ticketDetails.ticketdetails}</div>
+            </div>
+          </Col>
+          <Col span={8}>
+          </Col>
+        </Row>
+        
       )
     }
   }
