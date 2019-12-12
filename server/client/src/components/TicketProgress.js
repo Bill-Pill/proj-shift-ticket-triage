@@ -15,17 +15,22 @@ class TicketProgress extends Component {
     this.state = {
       stepStatus: 'process',
       message: '',
-      responseVisible: false
+      responseVisible: false,
+      demoUserResponse: ''
     };
   }
 
   componentDidMount () {
     socket.on('demo increment', ticketid => {
-      if (ticketid === this.props.ticketDetails[0].ticketid) {
-        console.log('incrementing demo step on client')
-        this.incrementTimedDemoStepToResponse()
+      if (ticketid === this.props.ticketDetails[0].ticketid && 
+        this.props.ticketDetails[0].statuscode === 0) {
+            console.log('incrementing demo step on client')
+            this.incrementTimedDemoStepToResponse()
       }
-      
+      // Sets demo response to state if complete ticket found
+      if (this.props.ticketDetails[0] && this.props.ticketDetails[0].demoresponse) {
+        this.setState({demoUserResponse: this.props.ticketDetails[0].demoresponse})
+      }
     })
   }
 
@@ -106,7 +111,7 @@ class TicketProgress extends Component {
     console.log('progress bar render props ', this.props)
     return (
       <div>
-        <Row type="flex" justify="space-around" align="right">
+        <Row type="flex" justify="space-around" align="top">
           <Col span={8}></Col>
           <Col span={8}>
             {this.state.responseVisible ? (
@@ -138,7 +143,7 @@ class TicketProgress extends Component {
             ----------------- **COLORCHANGE** (USERNAME) is
             typing up a response"/>
           <Step title="Response Requested" description="(USERNAME) has requested a response" />
-          <Step title="Issue Resolved" description="Huzzah! Ticket is now resolved and closed" />
+          <Step title="Issue Resolved" description={this.state.demoUserResponse} />
         </Steps>
                   
             ) : (
@@ -149,7 +154,7 @@ class TicketProgress extends Component {
                   ----------------- **COLORCHANGE** (USERNAME) is
                   typing up a response"/>
                 <Step title="Response Requested" description="(USERNAME) has requested a response" />
-                <Step title="Issue Resolved" description="Huzzah! Ticket is now resolved and closed with OS" />
+                <Step title="Issue Resolved" description={this.state.demoUserResponse} />
               </Steps>
             )
           }
