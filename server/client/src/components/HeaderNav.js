@@ -15,7 +15,7 @@ const logoStyle = {
   height: '44px',
   margin: '16px 24px 16px 0',
   display: 'inline-block',
-  float: 'left'
+  lineHeight: '32px'
 }
 
 class HeaderNav extends Component {
