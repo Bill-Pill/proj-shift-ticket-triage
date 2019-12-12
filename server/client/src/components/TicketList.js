@@ -29,7 +29,7 @@ class TicketList extends Component {
             <div style={{ padding: 0, background: '#fff', minHeight: 360 }}>
               <div className="container-status">
                 <Row type="flex" className="row-status">
-                  <Col span={20} offset={2}>
+                  <Col span={24}>
                     <TicketTable />
                   </Col>
                 </Row>
