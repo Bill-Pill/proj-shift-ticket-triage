@@ -60,7 +60,9 @@ class TicketTable extends Component {
     console.log('ticket table props ', this.props)
     return (
       <Table dataSource={this.props.tickets || []} columns={columns}
-        rowKey="ticketid">
+        rowKey="ticketid"
+        pagination={false} scroll={{ y: 375}}
+        >
       </Table>
     )
   }
