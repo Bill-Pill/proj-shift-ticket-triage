@@ -83,23 +83,18 @@ class HeaderNav extends Component {
         </Media>
         <Modal
           visible={this.state.visible}
-          title="Title"
+          title="Welcome to Demo Night!"
           footer={[
-            // <Button key="adminlogin" type="danger"
-            //   onClick={this.handleLogin}>
-            //   Login as Admin
-            // </Button>,
-            // <Button key="userlogin" type="primary" 
-            //   onClick={this.handleTest}>
-            //   Login as User
-            // </Button>,
             <Button key="demologin" type="primary" 
               onClick={this.handleDemoLoginClick}>
               Demo!
             </Button>
           ]}
         >
-          <p>Don't worry - you won't break anything.</p>
+          <p>Please create a ticket using the sidebar form.</p>
+          <p>Once created, click the ticket on the list to watch the process realtime.</p>
+          <p>Be ready - you'll be asked by Mr. IT bot for a repsonse.</p>
+          <p>That's it - enjoy the evening and please do stop by my booth. - Billy</p>
         </Modal>
     </Header>
     )

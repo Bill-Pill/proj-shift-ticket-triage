@@ -51,7 +51,7 @@ class TicketProgress extends Component {
       // wait a few seconds before starting demo
       setTimeout(() => {
         socket.emit('start demo', this.props.ticketDetails[0].ticketid)
-      }, 4000)
+      }, 3000)
       
     }
 
