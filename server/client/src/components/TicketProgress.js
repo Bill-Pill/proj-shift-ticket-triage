@@ -14,7 +14,7 @@ class TicketProgress extends Component {
 
     this.state = {
       stepStatus: 'process',
-      inputVisible: false
+      responseVisible: false
     };
   }
 
@@ -22,7 +22,6 @@ class TicketProgress extends Component {
     socket.on('demo increment', ticketid => {
       if (ticketid === this.props.ticketDetails[0].ticketid) {
         console.log('incrementing demo step on client')
-        
         this.incrementTimedDemoStepToResponse()
       }
       
@@ -38,6 +37,11 @@ class TicketProgress extends Component {
       }, 4000)
       
     }
+
+  }
+
+  toggleResponseForm = () => {
+    this.setState({responseVisible: (!this.state.responseVisible)})
   }
 
   onResponseClick = () => {
@@ -83,9 +87,10 @@ class TicketProgress extends Component {
         if (currentStep >= 2) {
           console.log('demo pausing')
           this.setState({stepStatus: 'error'})
+          this.toggleResponseForm()
           clearInterval(intervalId)
         }
-      }, 2000)
+      }, 2500)
     }
 
   }
@@ -94,15 +99,28 @@ class TicketProgress extends Component {
     console.log('progress bar render props ', this.props)
     return (
       <div>
-        <div>
-          <input
-            onChange={this.onChange}
-            className="inputMessage" 
-            placeholder="I.E. Windows 7, MacOS10, etc"
-            style={{marginBottom: '100px'}}
-            />
-          <Button onClick={this.onResponseClick}>Respond to ticket</Button>
-        </div>
+        <Row type="flex" justify="space-around" align="right">
+          <Col span={8}></Col>
+          <Col span={8}>
+            {this.state.responseVisible ? (
+              <div>
+                <h3>Response Requested</h3>
+                <label>Hey there - I'm working on your ticket now. Can you help by typing in your OS below and submit your reponse?</label>
+                <div>
+                  <input
+                onChange={this.onChange}
+                className="inputMessage" 
+                placeholder="I.E. Windows 7, MacOS10, etc"
+                style={{paddingBottom: '20px', width: '250px'}}
+                />
+                <Button onClick={this.onResponseClick}
+                  style={{marginBottom: '100px'}}>Submit Response</Button>
+                </div>
+              </div>
+            ) : null }
+          </Col>
+          <Col span={8}></Col>
+        </Row>
         <Media query={{ maxWidth: 1199 }}>
           {matches =>
             matches ? (
