@@ -31,10 +31,7 @@ class TicketDetails extends Component {
       console.log("Confirmed as demo user!")
     }
   }
-  onChange = (e) => {
-    let value = e.target.value
-    this.setState({message: value})
-  }
+  
 
 
   renderTicketDetails() {

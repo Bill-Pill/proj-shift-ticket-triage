@@ -100,16 +100,12 @@ io.on('connection', (socket) => {
 
 
   //User response with OS
-  socket.on('user response', (ticketid, response) => {
+  socket.on('demo user response', (ticketid, response) => {
     console.log('Sending response to SQL land. ticket:', ticketid, ' OS: ', response)
     tickets.putDemoResponse(ticketid, response, db)
   })
 
-  // create room according to ticketid
-  socket.on('create', room => {
-    socket.join(room)
-    console.log('joined room for ticket: ', room)
-  })
+
 
   // when the client emits 'new message', this listens and executes
   socket.on('new message', (data) => {

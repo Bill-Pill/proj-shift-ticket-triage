@@ -14,6 +14,7 @@ class TicketProgress extends Component {
 
     this.state = {
       stepStatus: 'process',
+      message: '',
       responseVisible: false
     };
   }
@@ -48,7 +49,8 @@ class TicketProgress extends Component {
     if (this.props.ticketDetails[0]) {
       const ticketid = this.props.ticketDetails[0].ticketid
       console.log('os sent ', this.state.message)
-      socket.emit('user response', ticketid, this.state.message)
+      socket.emit('demo user response', ticketid, this.state.message)
+      this.toggleResponseForm()
     }
   }
 
@@ -93,6 +95,11 @@ class TicketProgress extends Component {
       }, 2500)
     }
 
+  }
+
+  onChange = (e) => {
+    let value = e.target.value
+    this.setState({message: value})
   }
 
   render() {
@@ -142,7 +149,7 @@ class TicketProgress extends Component {
                   ----------------- **COLORCHANGE** (USERNAME) is
                   typing up a response"/>
                 <Step title="Response Requested" description="(USERNAME) has requested a response" />
-                <Step title="Issue Resolved" description="Huzzah! Ticket is now resolved and closed" />
+                <Step title="Issue Resolved" description="Huzzah! Ticket is now resolved and closed with OS" />
               </Steps>
             )
           }
