@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom'
 import { Layout, Menu, Icon, Modal, Button } from 'antd';
 import Media from 'react-media'
 import { loginToStore, logOutOfStore, loginAsDemo } from "../actions"
@@ -60,10 +61,12 @@ class HeaderNav extends Component {
                     theme="dark"
                     mode="horizontal"
                     breakpoint={'xs'}
-                    defaultSelectedKeys={['1']}
+                    selectedKeys={['/tickets']}
                     style={{ lineHeight: '64px', float: 'left' }}
                   >
-                    <Menu.Item key="1">Tickets</Menu.Item>
+                   <Menu.Item key="/tickets">
+                     <Link to='/tickets'>Tickets</Link>
+                    </Menu.Item>
 
                   </Menu>
                   
@@ -72,10 +75,12 @@ class HeaderNav extends Component {
                     theme="dark"
                     mode="horizontal"
                     breakpoint={'xs'}
-                    defaultSelectedKeys={['1']}
+                    selectedKeys={['/tickets']}
                     style={{ lineHeight: '64px', float: 'right', marginRight: '250px' }}
                   >
-                    <Menu.Item key="1">Tickets</Menu.Item>
+                    <Menu.Item key="/tickets">
+                      <Link to='/tickets'>Tickets</Link>
+                    </Menu.Item>
 
                   </Menu>
             )
