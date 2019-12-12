@@ -26,15 +26,7 @@ class HeaderNav extends Component {
         <div className="logo" style={logoStyle}>WIP
           <Icon type="plus-square" theme="filled" 
             style={{display:'inline', fontSize: '30px'}}/>TRIAGE</div>
-        {/* <Media queries={{
-          xs: "(max-width: 575px)",
-          s: "(min-width: 576px) and (max-width: 767px)",
-          m: "(min-width: 768px) and (max-width: 991px)",
-          l: "(min-width: 992px) and (max-width: 1199px)",
-          large: "(min-width: 1200px)"
-        }}>
 
-        </Media> */}
         <Media query={{ maxWidth: 768 }}>
           {matches =>
             matches ? (
@@ -46,8 +38,7 @@ class HeaderNav extends Component {
                     defaultSelectedKeys={['1']}
                     style={{ lineHeight: '64px', float: 'left' }}
                   >
-                    <Menu.Item key="1">nav 1</Menu.Item>
-                    <Menu.Item key="2">Nav 2</Menu.Item>
+                    <Menu.Item key="1">Tickets</Menu.Item>
 
                   </Menu>
                   
@@ -59,8 +50,7 @@ class HeaderNav extends Component {
                     defaultSelectedKeys={['1']}
                     style={{ lineHeight: '64px', float: 'right', marginRight: '250px' }}
                   >
-                    <Menu.Item key="1">nav 1</Menu.Item>
-                    <Menu.Item key="2">Nav 2</Menu.Item>
+                    <Menu.Item key="1">Tickets</Menu.Item>
 
                   </Menu>
             )

@@ -43,11 +43,11 @@ class TicketDetails extends Component {
           </Col>
           <Col span={8}>
             <div className='details' style={{textAlign: "center"}}>
-              <div>Title: {ticketDetails.title}</div>
-              <div>Category: {ticketDetails.category}</div>
-              <div>User: Demo User</div>
-              <div>Department: {ticketDetails.department}</div>
-              <div>Details: {ticketDetails.ticketdetails}</div>
+              <div><strong>Title:</strong> {ticketDetails.title}</div>
+              <div><strong>Category:</strong> {ticketDetails.category}</div>
+              <div><strong>User:</strong> Demo User</div>
+              <div><strong>Department:</strong> {ticketDetails.department}</div>
+              <div><strong>Details:</strong> {ticketDetails.ticketdetails}</div>
             </div>
           </Col>
           <Col span={8}>
