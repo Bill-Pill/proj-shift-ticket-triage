@@ -86,20 +86,18 @@ let sockets = {
 // Sockets & Express hookup
 const server = http.createServer(app)
 const io = module.exports.io = require('socket.io').listen(server)
+
 io.on('connection', (socket) => {
   console.log('socket connection established')
 
   sockets[socket.id] = socket
+
   //triggers user prompt logic for specific ticket
   socket.on('start demo', ticketid => {
     console.log('start demo triggered on server')
-    socket.emit('increment step', ticketid)
+    socket.emit('demo increment', ticketid)
   })
 
-  //triggers user prompt logic for specific ticket
-  socket.on('demo prompt', ticketid => {
-    console.log('demo prompt for ticket: ', ticketid)
-  })
 
   //User response with OS
   socket.on('user response', (ticketid, response) => {

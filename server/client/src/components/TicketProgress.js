@@ -9,14 +9,22 @@ const socket = io()
 const { Step } = Steps;
 
 class TicketProgress extends Component {
+    constructor(props) {
+    super(props);
+
+    this.state = {
+      stepStatus: 'process'
+    };
+  }
 
   componentDidMount () {
-    socket.on('increment step', ticketid => {
+    socket.on('demo increment', ticketid => {
       if (ticketid === this.props.ticketDetails[0].ticketid) {
-        console.log('incrementing step on client')
+        console.log('incrementing demo step on client')
+        
+        this.incrementTimedDemoStepToResponse()
       }
       
-      this.incrementStep()
     })
   }
 
@@ -26,7 +34,7 @@ class TicketProgress extends Component {
       // wait a few seconds before starting demo
       setTimeout(() => {
         socket.emit('start demo', this.props.ticketDetails[0].ticketid)
-      }, 5000)
+      }, 4000)
       
     }
   }
@@ -58,7 +66,8 @@ class TicketProgress extends Component {
     }
   }
 
-  incrementTimedStep = () => {
+  // Logic triggering on demo start
+  incrementTimedDemoStepToResponse = () => {
     let currentStep = this.currentStep()
 
     if(this.props.ticketDetails[0]) {
@@ -70,23 +79,14 @@ class TicketProgress extends Component {
         this.props.updateTicketStatus(ticketid, newStep)
         currentStep += 1
         // clear loop
-        if (currentStep >= 4) {
+        if (currentStep >= 2) {
+          console.log('demo pausing')
+          this.state.stepStatus = 'error'
           clearInterval(intervalId)
         }
       }, 2000)
     }
-    
-    // while (currentStep < 4 && this.props.ticketDetails[0]) {
-    //   setTimeout(() => {
-    //     console.log('currently on step ', currentStep)
-    //     let newStep = currentStep + 1;
-    //     const ticketid = this.props.ticketDetails[0].ticketid
-    //     this.props.updateTicketStatus(ticketid, newStep)
-    //     currentStep += 1
-    //   },5000)
-      
-    
-    // }
+
   }
 
   render() {
@@ -103,7 +103,7 @@ class TicketProgress extends Component {
         <Media query={{ maxWidth: 1199 }}>
           {matches =>
             matches ? (
-        <Steps direction="vertical" current={this.currentStep()} status="process">
+        <Steps direction="vertical" current={this.currentStep()} status={this.state.stepStatus}>
           <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
           <Step title="Resolving Issue" description="(USERNAME) is now hard at 
             work resolving the issue. --------------------
@@ -114,7 +114,7 @@ class TicketProgress extends Component {
         </Steps>
                   
             ) : (
-              <Steps current={this.currentStep()} status="process">
+              <Steps current={this.currentStep()} status={this.state.stepStatus}>
                 <Step title="Ticket Sent" description="Your ticket is sent and waiting for review" />
                 <Step title="Resolving Issue" description="(USERNAME) is now hard at 
                   work resolving the issue. --------------------
